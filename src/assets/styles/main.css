@@ -1,4 +1,9 @@
 @import url("https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,900|Nunito:300,400,400i,600,700,800,900|Oswald:300,400,500,600,700|Roboto:300,400,400i,500,700,900&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Be+Vietnam:700,800&display=swap");
+.text-justify {
+  text-align: justify;
+  text-justify: inter-word;
+}
 .bgcolor1 {
   background-color: #3b383e;
 }
@@ -19,13 +24,105 @@
 .allpage a:hover {
   color: #3b383e;
 }
-.header {
+.allpage .header {
   height: 75px;
   background-color: #53686B;
   padding-top: 10px;
   padding-bottom: 10px;
+  border-bottom: 1px solid #919ea0;
+}
+.allpage .navbar a {
+  text-decoration: none !important;
+  color: #3b383e;
+}
+.allpage .navbar a h6 {
+  margin-bottom: 0;
+}
+.allpage .navbar a:hover {
+  color: #663f30;
+}
+.allpage .navbar img:hover {
+  transform: scale(1.1);
+}
+.activity .MuiBox-root-97 {
+  padding-left: 0;
+  padding-right: 0;
+  font-family: "Nunito", sans-serif !important;
+}
+.activity h6 {
+  font-family: "Nunito", sans-serif !important;
+}
+.brewing .methodcard .methodname {
+  height: 55px;
+}
+.brewing .rowhomeimage {
+  margin-right: -30px;
+  margin-left: -30px;
+  margin-top: -25px;
+}
+.brewing .rowhomeimage .homecarousel {
+  width: 100%;
+}
+.errorpage {
+  height: 100%;
+  margin: -15px;
+  margin-top: -25px;
+}
+.errorpage .errorimage {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  padding-bottom: 60px;
+}
+.demopage .timersection {
+  background-color: #3b383e;
+  margin-right: -30px !important;
+  margin-left: -30px !important;
+  margin-top: -25px !important;
+}
+.demopage .timersection .timer {
+  width: 100%;
+}
+.demopage .timersection .timer .timerminute {
+  font-size: 90px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  color: white;
+}
+.demopage .timersection .timer .timersecond {
+  font-size: 50px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  color: white;
+  padding: 0 0 15px 0;
+}
+.demopage .timersection .progress {
+  height: 30px;
+}
+.demopage .timersection .progress .bg-info {
+  background-color: #c3935b !important;
+}
+.demopage .timersection .CircularProgressbar .CircularProgressbar-path {
+  stroke: #c3935b;
+}
+.demopage .timersection .CircularProgressbar .CircularProgressbar-text {
+  fill: white;
+}
+.demopage .timersection .makeStyles-start-76:hover {
+  background-color: #53686b;
+}
+.demopage .timersection .makeStyles-pause-320:hover {
+  background-color: #ff0015;
+}
+.demopage .timersection .MuiFab-primary:hover {
+  background-color: #303f9f;
+}
+.review .SocialMediaShareButton {
+  display: inline-block;
 }
 .recipeCard {
+  font-family: "Nunito", sans-serif !important;
   max-width: 420px;
 }
 .recipeCard h4 {
@@ -40,73 +137,51 @@
 .recipeCard a:hover img {
   background-color: blue;
 }
-.toggle-base {
+.scrolls {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  height: 80px;
+  white-space: nowrap;
+}
+.filterHeader {
+  width: 100%;
+  background-color: #53686B;
   height: 20px;
 }
-.toggle-enter {
-  animation-name: fade-in;
-  animation-duration: 300ms;
+.MuiPaper-root {
+  max-width: 480px;
+  justify-items: center;
 }
-.toggle-leave {
-  animation-name: fade-out;
-  animation-duration: 300ms;
+.MuiDrawer-paperAnchorBottom {
+  margin: auto;
 }
-@keyframes fade-in {
-  from {
-    opacity: 0;
-    height: 0px;
-  }
-  to {
-    opacity: 1;
-    height: 20px;
-  }
+.backbutton {
+  position: absolute;
+  top: 80px;
+  left: 10px;
+  width: 50px;
+  padding: 10px;
 }
-@keyframes fade-out {
-  from {
-    opacity: 1;
-    height: 20px;
-  }
-  to {
-    opacity: 0;
-    height: 0px;
-  }
+.backbutton:hover {
+  background-color: #bcbcbc;
+  border-radius: 50%;
 }
-.navbar {
-  background-color: #e1e3de;
+.homebutton {
+  padding: 10px;
+  height: 100%;
 }
-.navbar a {
-  text-decoration: none !important;
-  color: #3b383e;
+.homebutton:hover {
+  background-color: #bcbcbc;
+  border-radius: 50%;
 }
-.navbar a h6 {
-  margin-bottom: 0;
+.pagination-lg {
+  padding-left: 15px !important;
+  padding-right: 15px !important;
 }
-.navbar a:hover {
-  color: #663f30;
-}
-.navbar img:hover {
-  transform: scale(1.1);
-}
-.activity .MuiBox-root-97 {
-  padding-left: 0;
-  padding-right: 0;
-  font-family: "Nunito", sans-serif !important;
-}
-.activity h6 {
-  font-family: "Nunito", sans-serif !important;
-}
-.activity .activityBar {
-  margin-right: -30px;
-  margin-left: -30px;
-  margin-top: -50px;
-}
-.brewing .rowhomeimage {
-  margin-right: -30px;
-  margin-left: -30px;
-  margin-top: -25px;
-}
-.brewing .rowhomeimage .homeimage {
-  width: 100%;
+.pagination-lg .page-link {
+  padding: 0 17px !important;
+  color: #6C757D;
+  font-size: 35px !important;
 }
 .overlaycontainer {
   position: relative;
@@ -141,42 +216,34 @@
   font-size: 16px;
   padding: 16px 32px;
 }
-.backbutton {
-  position: absolute;
-  top: 75px;
-  left: 10px;
-  width: 15%;
-  padding: 10px;
-}
-.backbutton:hover {
-  background-color: #bcbcbc;
-  border-radius: 50%;
-}
-.homebutton {
-  padding: 10px;
-}
-.homebutton:hover {
-  background-color: #bcbcbc;
-  border-radius: 50%;
-}
-.scrolls {
-  overflow-x: scroll;
-  overflow-y: hidden;
-  height: 80px;
-  white-space: nowrap;
-}
-.filterHeader {
-  width: 100%;
-  background-color: #53686B;
+.toggle-base {
   height: 20px;
 }
-.MuiPaper-root {
-  max-width: 480px;
-  justify-items: center;
+.toggle-enter {
+  animation-name: fade-in;
+  animation-duration: 300ms;
 }
-.MuiDrawer-paperAnchorBottom {
-  margin: auto;
+.toggle-leave {
+  animation-name: fade-out;
+  animation-duration: 300ms;
 }
-.SocialMediaShareButton {
-  display: inline-block;
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    height: 0px;
+  }
+  to {
+    opacity: 1;
+    height: 20px;
+  }
+}
+@keyframes fade-out {
+  from {
+    opacity: 1;
+    height: 20px;
+  }
+  to {
+    opacity: 0;
+    height: 0px;
+  }
 }

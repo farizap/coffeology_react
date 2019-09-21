@@ -1,85 +1,28 @@
-import React, { useState, useEffect, useRef } from "react";
-import ReactDOM from "react-dom";
+import React, { useState } from 'react';
+import { withStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import axios from 'axios';
+import {
+  Formik, Form, Field, ErrorMessage,
+} from 'formik';
+import * as Yup from 'yup';
+// import { DisplayFormikState } from './formikHelper';
 
-import { CSSTransitionGroup } from "react-transition-group";
-import StepCard from "../components/stepCard";
-import { connect } from "unistore/react";
-import actionsDemo from "../store/actionsDemo";
-
-function Timer(props) {
-  return (
-    <h1>
-      Time : {Math.floor(Math.floor(props.timerNow / 10) / 60)}.{" "}
-      {Math.floor(props.timerNow / 10) % 60}. {props.timerNow % 10}{" "}
-    </h1>
-  );
+const contactFormEndpoint = process.env.REACT_APP_CONTACT_ENDPOINT;
+const userSchema = Yup.object().shape({
+  email: Yup.string()
+    .email()
+    .required('Required'),
+  name: Yup.string().required('Required'),
+  comment: Yup.string().required('Required'),
+});
+function Contact(props) {
+  return <div />;
 }
-
-function TimerButton(props) {
-  return (
-    <div>
-      {!props.isRunning ? (
-        <button
-          type="button"
-          className="btn btn-danger"
-          onClick={props.onClick}
-        >
-          Mulai
-        </button>
-      ) : (
-        <button type="button" class="btn btn-danger" onClick={props.onClick}>
-          Stop
-        </button>
-      )}
-    </div>
-  );
-}
-
-function RecipeSteps(props) {
-  console.log(props);
-  return (
-    <div className="col-12">
-      {props.recipeSteps.map((recipeStep, index) => {
-        return (
-          <div>
-            <CSSTransitionGroup
-              transitionName="example"
-              transitionEnterTimeout={500}
-              transitionLeaveTimeout={300}
-            >
-              <div>
-                <StepCard data={recipeStep} />
-              </div>
-            </CSSTransitionGroup>
-          </div>
-        );
-      })}
-    </div>
-  );
-}
-connect(
-  "recipeSteps",
-  actionsDemo
-)(RecipeSteps);
-
-function useInterval(callback, delay) {
-  const savedCallback = useRef();
-
-  // Remember the latest function.
-  useEffect(() => {
-    savedCallback.current = callback;
-  }, [callback]);
-
-  // Set up the interval.
-  useEffect(() => {
-    function tick() {
-      savedCallback.current();
-    }
-    if (delay !== null) {
-      let id = setInterval(tick, delay);
-      return () => clearInterval(id);
-    }
-  }, [delay]);
-}
-
-export default Counter;
+export default Contact;

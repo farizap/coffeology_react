@@ -15,7 +15,6 @@ class Timer extends React.Component {
   }
 
   changeTimerInterval = () => {
-    console.log(this.props.timerNow);
     this.timerInterval = setInterval(() => {
       this.props.setTimer(
         this.props.timerNow === 0 ? 0 : this.props.timerNow - 1
@@ -68,7 +67,6 @@ class Timer extends React.Component {
   render() {
     return (
       <div>
-        {console.log(this.props.waterNow)}
         <h1>
           Time : {Math.floor(Math.floor(this.props.timerNow / 10) / 60)}.{" "}
           {Math.floor(this.props.timerNow / 10) % 60}.{" "}
@@ -121,6 +119,5 @@ class Timer extends React.Component {
 }
 
 export default connect(
-  "timerNow, waterNow,waterLimit,stepWater,stepTime,recipe",
   actionsDemo
 )(Timer);

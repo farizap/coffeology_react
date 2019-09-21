@@ -1,25 +1,23 @@
-import store from "./store";
-import axios from "axios";
-import Swal from "sweetalert2";
+import axios from 'axios';
+import Swal from 'sweetalert2';
+import store from './store';
 
 const Toast = Swal.mixin({
   toast: true,
-  position: "center",
+  position: 'center',
   showConfirmButton: false,
-  timer: 2000
+  timer: 2000,
 });
 
-const actionsDemo = store => ({
+const actionsDemo = (store) => ({
   // setter data
   setTimer(state, value) {
     if (value === 0) {
-      console.log("nambah", store.getState().timerNow);
       return { stepIndex: store.getState().stepIndex + 1 };
     }
     return { timerNow: value };
   },
   setStepIndex(state, value) {
-    console.log("sett");
     return { stepIndex: value };
   },
   setWaterNow(state, value) {
@@ -44,45 +42,45 @@ const actionsDemo = store => ({
     store.setState({ waterLimit: 0 });
     store.setState({ stepTime: 0 });
     store.setState({ stepWater: 0 });
-    console.log(store.getState().waterNow);
   },
   shiftRecipeSteps(state) {
     const recipeStepsShifted = store.getState().recipeSteps.shift();
-    console.log(recipeStepsShifted);
     return { recipeSteps: recipeStepsShifted };
   },
 
   async postHistory(state, data) {
-    console.log("test");
-    let config = {
-      method: "post",
-      url: store.getState().baseURL + "/history",
-      data: data,
+    const config = {
+      method: 'post',
+      url: `${store.getState().baseURL}/history`,
+      data,
       headers: {
-        Authorization: "Bearer " + sessionStorage.getItem("token")
-      }
+        Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+      },
     };
     await axios(config)
-      .then(response => {
+      .then((response) => {
+        /* eslint-disable no-console */
         store.setState({ historyID: response.data.data.id });
       })
-      .catch(error => console.log("Error postHistory", error));
+      .catch((error) => console.log('Error postHistory', error));
   },
 
   async postReview(state, data) {
-    console.log("test", data);
-    let config = {
-      method: "post",
-      url: store.getState().baseURL + "/reviews",
-      data: data,
+    const config = {
+      method: 'post',
+      url: `${store.getState().baseURL}/reviews`,
+      data,
       headers: {
-        Authorization: "Bearer " + sessionStorage.getItem("token")
-      }
+        Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+      },
     };
     await axios(config)
-      .then(response => {})
-      .catch(error => console.log("Error postReview", error));
-  }
+      .then((response) => { })
+      .catch((error) => {
+        console.log('Error postReview', error);
+        /* eslint-enable no-console */
+      });
+  },
 });
 
 export default actionsDemo;

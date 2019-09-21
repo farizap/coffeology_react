@@ -1,78 +1,81 @@
-import store from "./store";
-import axios from "axios";
-import Swal from "sweetalert2";
+import axios from 'axios';
+import Swal from 'sweetalert2';
+import store from './store';
 
 const Toast = Swal.mixin({
   toast: true,
-  position: "center",
+  position: 'center',
   showConfirmButton: false,
-  timer: 2000
+  timer: 2000,
 });
 
 const ToastTop = Swal.mixin({
   toast: true,
-  position: "top",
+  position: 'top',
   showConfirmButton: false,
-  timer: 2000
+  timer: 2000,
 });
 
-const actionsUsers = store => ({
+const actionsUsers = (store) => ({
   // user login
+  setStatusRegister(state, value) {
+    return { statusRegister: value };
+  },
   login(state, data) {
-    let config = {
-      method: "post",
-      url: store.getState().baseURL + "/token",
-      data: data
+    const config = {
+      method: 'post',
+      url: `${store.getState().baseURL}/token`,
+      data,
     };
     axios(config)
-      .then(response => {
-        console.log(response);
-        sessionStorage.setItem("token", response.data.token);
+      .then((response) => {
+        sessionStorage.setItem('token', response.data.token);
         store.setState({ login: store.getState().login + 1 });
       })
-      .catch(error => {
-        console.log(error.response);
+      .catch((error) => {
         Toast.fire({
-          type: "error",
-          title: error.response.data.message
+          type: 'error',
+          title: error.response.data.message,
         });
       });
   },
   registerUser(state, data) {
-    data["photo"] = "";
-    let config = {
-      method: "post",
-      url: store.getState().baseURL + "/users",
-      data: data
+    data.photo = '';
+    const config = {
+      method: 'post',
+      url: `${store.getState().baseURL}/users`,
+      data,
     };
 
     axios(config)
-      .then(async response => {
-        let config = {
-          method: "post",
-          url: store.getState().baseURL + "/token",
-          data: data
+      .then(async (response) => {
+        const config = {
+          method: 'post',
+          url: `${store.getState().baseURL}/token`,
+          data,
         };
         await axios(config)
-          .then(response => {
-            console.log(response);
-            sessionStorage.setItem("token", response.data.token);
+          .then((response) => {
+            sessionStorage.setItem('token', response.data.token);
+            store.setState({ login: store.getState().login + 1 });
+            store.setState({ statusRegister: true });
+            /* eslint-disable no-console */
           })
-          .catch(error => {
+          .catch((error) => {
             console.log(error);
           });
-        // sessionStorage.setItem("token", response.data.token);
       })
-      .catch(error => {
+      .catch((error) => {
+        /* eslint-enable no-console */
         ToastTop.fire({
-          type: "error",
-          title: error.response.data.message
+          type: 'error',
+          title: error.response.data.message,
         });
       });
   },
   logout(state) {
-    sessionStorage.removeItem("token");
-  }
+    sessionStorage.removeItem('token');
+  },
 });
 
 export default actionsUsers;

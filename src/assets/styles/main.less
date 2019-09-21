@@ -1,233 +1,322 @@
 @import url("https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,900|Nunito:300,400,400i,600,700,800,900|Oswald:300,400,500,600,700|Roboto:300,400,400i,500,700,900&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Be+Vietnam:700,800&display=swap");
 
 @fontoswald: "Oswald", sans-serif;
 @fontlato: "Lato", sans-serif;
 @fontnunito: "Nunito", sans-serif;
 @fontroboto: "Roboto", sans-serif;
-
 @color1 :#3b383e;
 @color2 :#53686B;
 @color3 :#6C757D;
 @color4 :#FFDED5;
 
+.text-justify {
+    text-align: justify;
+    text-justify: inter-word;
+}
+
 .bgcolor1 {
-  background-color: @color1;
+    background-color: @color1;
 }
+
 .bgcolor2 {
-  border-color: @color2;
-  border-style: solid;
-  border-radius: 50%;
-  padding: 10px;
+    border-color: @color2;
+    border-style: solid;
+    border-radius: 50%;
+    padding: 10px;
 }
 
+// PAGE
+// all page
 .allpage {
-  min-height: 100%;
-  font-family: @fontnunito !important;
-  a {
-    text-decoration: none !important;
-    color: @color1;
-  }
-  a:hover {
-    color: @color1;
-  }
-}
-.header {
-  height: 75px;
-  background-color: @color2;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
-.recipeCard {
-  max-width: 420px;
-  h4 {
-    font-size: 20px;
-  }
-
-  h6 {
-    font-size: 0.8em;
-  }
-  .starrating {
-    width: 20%;
-  }
-  a:hover {
-    img {
-      background-color: blue;
+    min-height: 100%;
+    font-family: @fontnunito !important;
+    a {
+        text-decoration: none !important;
+        color: @color1;
+        &:hover {
+            color: @color1;
+        }
     }
-  }
-}
 
-// steps
-
-.toggle-base {
-  height: 20px;
-}
-
-.toggle-enter {
-  animation-name: fade-in;
-  animation-duration: 300ms;
-}
-
-.toggle-leave {
-  animation-name: fade-out;
-  animation-duration: 300ms;
-}
-
-@keyframes fade-in {
-  from {
-    opacity: 0;
-    height: 0px;
-  }
-
-  to {
-    opacity: 1;
-    height: 20px;
-  }
-}
-
-@keyframes fade-out {
-  from {
-    opacity: 1;
-    height: 20px;
-  }
-
-  to {
-    opacity: 0;
-    height: 0px;
-  }
-}
-
-// navbar
-.navbar {
-  background-color: #e1e3de;
-
-  a {
-    text-decoration: none !important;
-
-    color: @color1;
-    h6 {
-      margin-bottom: 0;
+    // header
+    .header {
+        height: 75px;
+        background-color: @color2;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #919ea0;
     }
-  }
 
-  a:hover {
-    color: #663f30;
-  }
-  img:hover {
-    transform: scale(1.1);
-  }
+    // navbar
+    .navbar {
+        a {
+            text-decoration: none !important;
+            color: @color1;
+            h6 {
+                margin-bottom: 0;
+            }
+            &:hover {
+                color: #663f30;
+            }
+        }
+        img:hover {
+            transform: scale(1.1);
+        }
+    }
 }
 
-// activity
+// page activity
 .activity {
-  .MuiBox-root-97 {
-    padding-left: 0;
-    padding-right: 0;
-    font-family: @fontnunito !important;
-  }
-  h6 {
-    font-family: @fontnunito !important;
-  }
-  .activityBar {
-    margin-right: -30px;
-    margin-left: -30px;
-    margin-top: -50px;
-  }
+    .MuiBox-root-97 {
+        padding-left: 0;
+        padding-right: 0;
+        font-family: @fontnunito !important;
+    }
+    h6 {
+        font-family: @fontnunito !important;
+    }
 }
 
+// page brewing
 .brewing {
-  .rowhomeimage {
-    margin-right: -30px;
-    margin-left: -30px;
-    margin-top: -25px;
-    .homeimage {
-      width: 100%;
+    .methodcard {
+        .methodname {
+            height: 55px;
+        }
+        // row {
+        //     display: flex; /* equal height of the children */
+        // }
+        // .col-12 {
+        //     flex: 1; /* additionally, equal width */
+        // }
+        // height: 180px;
     }
-  }
+    .rowhomeimage {
+        margin-right: -30px;
+        margin-left: -30px;
+        margin-top: -25px;
+        .homecarousel {
+            width: 100%;
+        }
+    }
+}
+
+//  error page
+.errorpage {
+    height: 100%;
+    margin: -15px;
+    margin-top: -25px;
+    .errorimage {
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+        width: 100%;
+        padding-bottom: 60px;
+    }
+}
+
+// demo page
+.demopage {
+    .timersection {
+        background-color: @color1;
+        margin-right: -30px !important;
+        margin-left: -30px !important;
+        margin-top: -25px !important;
+        .timer {
+            width: 100%;
+            .timerminute {
+                font-size: 90px;
+                font-family: @fontroboto;
+                font-weight: 900;
+                color: white;
+            }
+            .timersecond {
+                font-size: 50px;
+                font-family: @fontroboto;
+                font-weight: 900;
+                color: white;
+                padding: 0 0 15px 0;
+            }
+        }
+        .progress {
+            height: 30px;
+            .bg-info {
+                background-color: #c3935b !important;
+            }
+        }
+        .CircularProgressbar .CircularProgressbar-path {
+            stroke: #c3935b;
+        }
+
+        .CircularProgressbar .CircularProgressbar-text {
+            fill: white;
+        }
+        // play button
+        .makeStyles-start-76:hover {
+            background-color: #53686b;
+        }
+        // pause button
+        .makeStyles-pause-320:hover {
+            background-color: #ff0015;
+        }
+        // skip button
+        .MuiFab-primary:hover {
+            background-color: #303f9f;
+        }
+    }
+}
+
+// review page
+.review {
+    .SocialMediaShareButton {
+        display: inline-block;
+    }
+}
+
+//COMPONENT
+// recipe card
+.recipeCard {
+    font-family: @fontnunito !important;
+    max-width: 420px;
+    h4 {
+        font-size: 20px;
+    }
+
+    h6 {
+        font-size: 0.8em;
+    }
+    .starrating {
+        width: 20%;
+    }
+    a:hover {
+        img {
+            background-color: blue;
+        }
+    }
+}
+
+// filter search
+.scrolls {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    height: 80px;
+    white-space: nowrap;
+}
+.filterHeader {
+    width: 100%;
+
+    background-color: @color2;
+    height: 20px;
+}
+.MuiPaper-root {
+    max-width: 480px;
+    justify-items: center;
+}
+.MuiDrawer-paperAnchorBottom {
+    margin: auto;
+}
+
+// back button
+.backbutton {
+    position: absolute;
+    top: 80px;
+    left: 10px;
+    width: 50px;
+    padding: 10px;
+    &:hover {
+        background-color: #bcbcbc;
+        border-radius: 50%;
+    }
+}
+
+// home button
+.homebutton {
+    padding: 10px;
+    height: 100%;
+    &:hover {
+        background-color: #bcbcbc;
+        border-radius: 50%;
+    }
+}
+
+// pagination
+.pagination-lg {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    .page-link {
+        padding: 0 17px !important;
+        color: @color3;
+        font-size: 35px !important;
+    }
 }
 
 // overlay
 .overlaycontainer {
-  position: relative;
+    position: relative;
 }
-
 .overlay {
-  opacity: 1;
-  display: block;
-  width: 100%;
-  height: auto;
-  transition: 0.5s ease;
-  backface-visibility: hidden;
+    opacity: 1;
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: 0.5s ease;
+    backface-visibility: hidden;
 }
-
 .middle {
-  transition: 0.5s ease;
-  opacity: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  text-align: center;
+    transition: 0.5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
 }
-
 .overlaycontainer:hover .overlay {
-  opacity: 0.3;
+    opacity: 0.3;
 }
-
 .overlaycontainer:hover .middle {
-  opacity: 1;
+    opacity: 1;
 }
-
 .text {
-  background-color: @color2;
-  color: @color4;
-  font-size: 16px;
-  padding: 16px 32px;
+    background-color: @color2;
+    color: @color4;
+    font-size: 16px;
+    padding: 16px 32px;
 }
 
-.backbutton {
-  position: absolute;
-  top: 75px;
-  left: 10px;
-  width: 15%;
-  padding: 10px;
-  &:hover {
-    background-color: #bcbcbc;
-    border-radius: 50%;
-  }
+// steps
+.toggle-base {
+    height: 20px;
 }
-.homebutton {
-  padding: 10px;
-  &:hover {
-    background-color: #bcbcbc;
-    border-radius: 50%;
-  }
+.toggle-enter {
+    animation-name: fade-in;
+    animation-duration: 300ms;
+}
+.toggle-leave {
+    animation-name: fade-out;
+    animation-duration: 300ms;
 }
 
-// filter
-.scrolls {
-  overflow-x: scroll;
-  overflow-y: hidden;
-  height: 80px;
-  white-space: nowrap;
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        height: 0px;
+    }
+    to {
+        opacity: 1;
+        height: 20px;
+    }
 }
-.filterHeader {
-  width: 100%;
-  
-  background-color: @color2;
-  height: 20px;
-}
+@keyframes fade-out {
+    from {
+        opacity: 1;
+        height: 20px;
+    }
 
-.MuiPaper-root {
-  max-width: 480px;
-  justify-items: center;
-}
-.MuiDrawer-paperAnchorBottom {
-  margin: auto;
-}
-
-// review
-.SocialMediaShareButton {
-  display: inline-block;
+    to {
+        opacity: 0;
+        height: 0px;
+    }
 }

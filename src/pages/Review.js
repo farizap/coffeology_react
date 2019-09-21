@@ -44,7 +44,6 @@ class Review extends React.Component {
   handleChange = event => {
     this.setState(
       { [event.target.name]: event.target.value },
-      console.log(event.target.name, event.target.value)
     );
   };
 
@@ -60,17 +59,23 @@ class Review extends React.Component {
           photo: this.state.photo
         }
       },
-      () => {
-        this.props.postReview(this.state.review);
-        this.props.history.push("/activity");
+      async () => {
+
+        await this.props.postReview(this.state.review);
+        await this.props.history.push("/activity");
       }
     );
   };
 
+  componentWillUnmount() {
+    sessionStorage.removeItem("RecipeDetail");
+    sessionStorage.removeItem("Recipe");
+  }
+
   render() {
     return (
       <div>
-        <div className="container">
+        <div className="container review">
           <div className="row justify-content-center">
             <Typography component="legend">
               APA PENDAPATMU TENTANG RESEP INI?
@@ -106,7 +111,7 @@ class Review extends React.Component {
               <input
                 className=" btn btn-dark btn-block my-3"
                 type="submit"
-                value="Sumbit"
+                value="Submit"
               />
             </form>
           </div>
@@ -123,6 +128,7 @@ class Review extends React.Component {
           <TelegramShareButton
             children={<TelegramIcon size={50} round={true} />}
             url={
+              "Resep dari coffeology ini baru saja kucoba " +
               "http://coffeology.shop/recipe/" +
               this.props.match.params.recipeID
             }
@@ -172,6 +178,6 @@ class Review extends React.Component {
 }
 
 export default connect(
-  "historyID menuButton, homeButton",
+  "historyID, menuButton, homeButton",
   actionsDemo
 )(Review);

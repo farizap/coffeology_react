@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 
 function AmountWater(props) {
   return (
-    <div className="form-group mt-3" style={{ textAlign: "left" }}>
-      <label for="Jumlah Air">Jumlah Air </label>
+    <div className="form-group mt-3" style={{ textAlign: 'left' }}>
+      <label htmlFor="Jumlah Air">Jumlah Air </label>
       <input
         type="number"
         className="form-control"

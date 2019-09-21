@@ -11,6 +11,7 @@
     "bootstrap": "^4.3.1",
     "disqus-react": "^1.0.7",
     "eslint-config-airbnb-base": "^14.0.0",
+    "formik": "^1.5.8",
     "git-fetcher": "^1.0.0-beta-13",
     "json-loader": "^0.5.7",
     "less": "^3.10.3",
@@ -24,10 +25,12 @@
     "react-alert": "^5.5.0",
     "react-alert-template-basic": "^1.0.0",
     "react-bootstrap": "^1.0.0-beta.12",
+    "react-circular-progressbar": "^2.0.2",
     "react-compound-slider": "^2.3.0",
     "react-compound-timer": "^1.1.5",
     "react-dom": "^16.9.0",
     "react-google-login": "^5.0.5",
+    "react-material-ui-form-validator": "^2.0.9",
     "react-notification-alert": "0.0.12",
     "react-radar": "^2.0.0-beta.111",
     "react-router-dom": "^5.0.1",
@@ -39,7 +42,8 @@
     "reactstrap": "^8.0.1",
     "sweetalert2": "^8.17.1",
     "typescript": "^3.6.3",
-    "unistore": "^3.4.1"
+    "unistore": "^3.4.1",
+    "yup": "^0.27.0"
   },
   "scripts": {
     "start": "react-scripts start",

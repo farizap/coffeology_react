@@ -2,7 +2,7 @@ import React from 'react';
 import RadarChart from 'react-svg-radar-chart';
 import 'react-svg-radar-chart/build/css/index.css';
 
-function radar(props) {
+function radarRecipe(props) {
   const data = [
     {
       data: {
@@ -14,9 +14,8 @@ function radar(props) {
         acidity: props.data.acidity,
         aftertaste: props.data.aftertaste,
         balance: props.data.balance,
-        global: props.data.globalTaste,
+        globalTaste: props.data.globalTaste,
         body: props.data.body,
-
       },
       meta: { color: 'blue' },
     },
@@ -32,11 +31,11 @@ function radar(props) {
     acidity: 'acidity',
     aftertaste: 'aftertaste',
     balance: 'balance',
-    global: 'global',
+    globalTaste: 'global',
     body: 'body',
   };
 
-  return <RadarChart captions={captions} data={data} />;
+  return <RadarChart captions={captions} data={data} size={300} />;
 }
 
-export default radar;
+export default radarRecipe;

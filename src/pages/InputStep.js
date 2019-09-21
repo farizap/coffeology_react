@@ -50,30 +50,30 @@ class InputStep extends React.Component {
             parseInt(this.second.current.value) === 0 &&
             parseInt(this.minute.current.value) === 0
         ) {
-            return alert("Waktu Tidak Boleh Kosong");
+            return this.props.Toast.fire({
+                type: "error",
+                title: "Waktu Tidak Boleh Kosong"
+            });
         }
 
         // validation waterAmount every Step = waterAmount Recipe
         let recipes = JSON.parse(sessionStorage.getItem("Recipe"));
 
-        console.log("data recipe water ", recipes.water);
-        console.log("this state temporary", this.state.stepTemporary);
 
         let totalWaterStep = parseInt(this.waterAmount.current.value);
         this.state.stepTemporary.map(
             (step, index) =>
                 (totalWaterStep = totalWaterStep + parseInt(step.amount))
         );
-        console.log("data total water step", totalWaterStep);
-        console.log("data curent water amount", this.waterAmount.current.value);
 
         if (parseInt(totalWaterStep) > parseInt(recipes.water)) {
             totalWaterStep -= this.waterAmount.current.value;
-            return alert(
-                `Jumlah Air Tidak Valid, Anda Hanya bisa menambahkan maksimal ${parseInt(
+            return this.props.Toast.fire({
+                type: "error",
+                title: `Jumlah Air Tidak Valid, Anda Hanya bisa menambahkan maksimal ${parseInt(
                     recipes.water
                 ) - parseInt(totalWaterStep)} ml`
-            );
+            });
         }
 
         // set total time
@@ -104,7 +104,11 @@ class InputStep extends React.Component {
                 />
                 <div className="container px-0">
                     <div className="row justify-content-center">
-                        {/* pilih tahapan */}
+                        <div className="col-12">
+                            <h4 className="font-weight-bold mb-0">
+                                DETAIL LANGKAH
+                            </h4>
+                        </div>
                         <div className="col-6">
                             <div
                                 className="form-group"
@@ -149,26 +153,26 @@ class InputStep extends React.Component {
                     <form onSubmit={this.handleSubmit}>
                         {/* form jumlah air */}
                         {parseInt(this.props.stepTypeNumberSelected) === 1 ||
-                        parseInt(this.props.stepTypeNumberSelected) === 2 ||
-                        parseInt(this.props.stepTypeNumberSelected) === 12 ? (
-                            <div
-                                className="form-group mt-3"
-                                style={{ textAlign: "left" }}
-                            >
-                                <label for="Jumlah Air">Jumlah Air </label>
-                                <input
-                                    type="number"
-                                    className="form-control"
-                                    id="Jumlah Air"
-                                    placeholder="200 ml"
-                                    ref={this.waterAmount}
-                                    min="0"
-                                    required
-                                />
-                            </div>
-                        ) : (
-                            <div ref={this.waterAmount}></div>
-                        )}
+                            parseInt(this.props.stepTypeNumberSelected) === 2 ||
+                            parseInt(this.props.stepTypeNumberSelected) === 12 ? (
+                                <div
+                                    className="form-group mt-3"
+                                    style={{ textAlign: "left" }}
+                                >
+                                    <label for="Jumlah Air">Jumlah Air </label>
+                                    <input
+                                        type="number"
+                                        className="form-control"
+                                        id="Jumlah Air"
+                                        placeholder="Masukkan Jumlah air"
+                                        ref={this.waterAmount}
+                                        min="0"
+                                        required
+                                    />
+                                </div>
+                            ) : (
+                                <div ref={this.waterAmount}></div>
+                            )}
 
                         {/* form catatan */}
                         <div
@@ -233,6 +237,6 @@ class InputStep extends React.Component {
 }
 
 export default connect(
-    "stepTypeNumberSelected, stepTypes, stepTypeNumber, stepNumber, stepTemporary, backButton",
+    "Toast, stepTypeNumberSelected, stepTypes, stepTypeNumber, stepNumber, stepTemporary, backButton",
     actionsRecipes
 )(InputStep);

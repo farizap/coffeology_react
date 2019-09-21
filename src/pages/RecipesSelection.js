@@ -40,7 +40,7 @@ class RecipesSelection extends React.Component {
   }
 
   componentWillUnmount() {
-    this.props.setRecipes([]);
+    this.props.setRecipesSelection(null);
   }
 
   handlePreviousPageButton = event => {
@@ -63,22 +63,22 @@ class RecipesSelection extends React.Component {
   };
 
   render() {
-    console.log(this.props);
-    if (_.isEmpty(this.props.recipesSelection)) {
+    if (this.props.recipesSelection === null) {
       return <img src={loading} alt="loading..." />;
+    } else if (_.isEmpty(this.props.recipesSelection.recipes)) {
+      return <h5>Maaf, Resep yang ada cari belum ada</h5>;
     } else {
       return (
         <div>
-          <h2>Recipes Selection</h2>
+          <h3 className="font-weight-bold">RECIPES SELECTION</h3>
           {this.props.recipesSelection.recipes.map(value => {
             return (
               <div className="col-12">
                 <Link to={"/recipe/" + value.id}>
                   <RecipeCard
                     data={value}
-                    methodIcon={
+                    method={
                       this.props.methods[this.props.match.params.methodID - 1]
-                        .icon
                     }
                     time={this.convertSeconds(value.time)}
                   />
@@ -86,19 +86,19 @@ class RecipesSelection extends React.Component {
               </div>
             );
           })}
-          <br />
-          <Pagination size="lg">
+
+          <Pagination size="lg" className="justify-content-between">
             {this.props.recipesSelection.pageNow === 1 ? (
               <span></span>
             ) : (
-              <Pagination.First onClick={this.handlePreviousPageButton} />
-            )}
+                <Pagination.First onClick={this.handlePreviousPageButton} />
+              )}
             {this.props.recipesSelection.pageNow ===
-            this.props.recipesSelection.pageTotal ? (
-              <span></span>
-            ) : (
-              <Pagination.Last onClick={this.handleNextPageButton} />
-            )}
+              this.props.recipesSelection.pageTotal ? (
+                <span></span>
+              ) : (
+                <Pagination.Last onClick={this.handleNextPageButton} />
+              )}
           </Pagination>
         </div>
       );

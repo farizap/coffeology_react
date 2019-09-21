@@ -23,19 +23,15 @@ class Steps extends React.Component {
   };
 
   componentWillMount() {
-    console.log("willMount", this.props);
     this.props.setStepIndex(0);
   }
 
   componentDidMount = async () => {
-    console.log("didMount", this.props);
 
     this.setState({ steps: this.props.recipeSteps }, () => {
-      console.log(this.state.steps);
     });
     await this.props.setStepIndex(0);
 
-    console.log(this.props.recipeSteps);
   };
 
   componentWillUnmount() {
@@ -75,21 +71,20 @@ class Steps extends React.Component {
           {sessionStorage.getItem("token") ? (
             <div></div>
           ) : (
-            <Redirect to="/login" />
-          )}
+              <Redirect to="/login" />
+            )}
 
           <div>Loading</div>
         </div>
       );
     } else {
-      console.log("stepindex", this.props.stepIndex);
       return (
         <div>
           {sessionStorage.getItem("token") ? (
             <div></div>
           ) : (
-            <Redirect to="/login" />
-          )}
+              <Redirect to="/login" />
+            )}
           <img
             className="backbutton "
             src={this.props.backButton}

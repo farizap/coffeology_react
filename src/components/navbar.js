@@ -73,7 +73,6 @@
 
 import React from "react";
 import { connect } from "unistore/react";
-import actionsUsers from "../store/actionUsers";
 import { makeStyles } from "@material-ui/core/styles";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
@@ -92,6 +91,7 @@ import {
   Login
 } from "mdi-material-ui";
 import { Link } from "react-router-dom";
+import actionsUsers from "../store/actionUsers";
 
 const useStyles = makeStyles({
   root: {
@@ -130,10 +130,6 @@ const SimpleBottomNavigation = props => {
       className={classes.root}
     >
       <BottomNavigationAction
-        style={{
-          paddingBottom: "10px",
-          paddingTop: "10px"
-        }}
         component={Link}
         to="/"
         className={classes.content}
@@ -141,30 +137,18 @@ const SimpleBottomNavigation = props => {
         icon={<CoffeeMaker />}
       />
       <BottomNavigationAction
-        style={{
-          paddingBottom: "10px",
-          paddingTop: "10px"
-        }}
         component={Link}
-        to="/login"
+        to="/beans"
         label="Biji"
         icon={<Seed />}
       />
       <BottomNavigationAction
-        style={{
-          paddingTop: "10px",
-          paddingBottom: "10px"
-        }}
         component={Link}
         to="/search"
         label="Cari"
         icon={<Magnify />}
       />
       <BottomNavigationAction
-        style={{
-          paddingBottom: "10px",
-          paddingTop: "10px"
-        }}
         component={Link}
         to="/activity"
         label="Aktifitas"
@@ -172,10 +156,6 @@ const SimpleBottomNavigation = props => {
       />
       {sessionStorage.getItem("token") !== null ? (
         <BottomNavigationAction
-          style={{
-            paddingBottom: "10px",
-            paddingTop: "10px"
-          }}
           component={Link}
           to="/profile/me"
           label="Profile"
@@ -183,10 +163,6 @@ const SimpleBottomNavigation = props => {
         />
       ) : (
         <BottomNavigationAction
-          style={{
-            paddingBottom: "10px",
-            paddingTop: "10px"
-          }}
           component={Link}
           to="/login"
           label="Masuk"
