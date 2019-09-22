@@ -1,27 +1,26 @@
-import React from "react";
+import React from 'react';
 
 // import store
-import { connect } from "unistore/react";
+import { connect } from 'unistore/react';
 
 // import components
-import RadarRecipe from "../components/radarRecipe";
-import { JsxEmit } from "typescript";
+import RadarRecipe from '../components/RadarRecipe';
 
 class CreateRecipe extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
+      name: '',
       methodID: 1,
       difficulty: 1,
-      coffeeWeight: "",
-      water: "",
+      coffeeWeight: '',
+      water: '',
       grindSize: 1,
-      waterTemp: "",
-      beanName: "",
+      waterTemp: '',
+      beanName: '',
       originID: 1,
-      beanProcess: "",
-      beanRoasting: "",
+      beanProcess: '',
+      beanRoasting: '',
       fragrance: 0.5,
       aroma: 0.5,
       cleanliness: 0.5,
@@ -32,20 +31,20 @@ class CreateRecipe extends React.Component {
       balance: 0.5,
       globalTaste: 0.5,
       body: 0.5,
-      recipeDataTeporary: []
+      recipeDataTeporary: [],
     };
   }
 
   componentDidMount = async () => {
     if (
-      sessionStorage.getItem("Recipe") !== null &&
-      sessionStorage.getItem("RecipeDetail") !== null
+      sessionStorage.getItem('Recipe') !== null &&
+      sessionStorage.getItem('RecipeDetail') !== null
     ) {
       await this.setState({
         recipeDataTeporary: {
-          ...JSON.parse(sessionStorage.getItem("Recipe")),
-          ...JSON.parse(sessionStorage.getItem("RecipeDetail"))
-        }
+          ...JSON.parse(sessionStorage.getItem('Recipe')),
+          ...JSON.parse(sessionStorage.getItem('RecipeDetail')),
+        },
       });
       await this.setState({
         name: this.state.recipeDataTeporary.name,
@@ -68,22 +67,22 @@ class CreateRecipe extends React.Component {
         aftertaste: this.state.recipeDataTeporary.aftertaste,
         balance: this.state.recipeDataTeporary.balance,
         globalTaste: this.state.recipeDataTeporary.globalTaste,
-        body: this.state.recipeDataTeporary.body
+        body: this.state.recipeDataTeporary.body,
       });
     }
   };
 
-  handleChangeRecipe = event => {
+  handleChangeRecipe = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  handleChangeRecipeDetail = event => {
+  handleChangeRecipeDetail = (event) => {
     this.setState({ [event.target.name]: parseFloat(event.target.value) });
   };
 
-  submitRecipe = async event => {
+  submitRecipe = async (event) => {
     await sessionStorage.setItem(
-      "Recipe",
+      'Recipe',
       JSON.stringify({
         name: this.state.name,
         methodID: this.state.methodID,
@@ -93,11 +92,11 @@ class CreateRecipe extends React.Component {
         beanRoasting: this.state.beanRoasting,
         difficulty: this.state.difficulty,
         coffeeWeight: this.state.coffeeWeight,
-        water: this.state.water
-      })
+        water: this.state.water,
+      }),
     );
     await sessionStorage.setItem(
-      "RecipeDetail",
+      'RecipeDetail',
       JSON.stringify({
         fragrance: this.state.fragrance,
         aroma: this.state.aroma,
@@ -110,10 +109,10 @@ class CreateRecipe extends React.Component {
         globalTaste: this.state.globalTaste,
         body: this.state.body,
         grindSize: this.state.grindSize,
-        waterTemp: this.state.waterTemp
-      })
+        waterTemp: this.state.waterTemp,
+      }),
     );
-    this.props.history.push("/recipes/create/addstep");
+    this.props.history.push('/recipes/create/addstep');
   };
 
   render() {
@@ -122,13 +121,12 @@ class CreateRecipe extends React.Component {
         <img
           className="backbutton"
           src={this.props.backButton}
-          onClick={event => this.props.history.push("/activity")}
+          onClick={(event) => this.props.history.push('/activity')}
+          alt="backButton"
         />
         <div className="container">
           <div className="row justify-content-center">
-              <h4 className="font-weight-bold mb-0">
-                  BUAT RESEP
-              </h4>
+            <h4 className="font-weight-bold mb-0">BUAT RESEP</h4>
           </div>
           <form onSubmit={this.submitRecipe}>
             <div className=" row ">
@@ -195,7 +193,7 @@ class CreateRecipe extends React.Component {
                   </div>
                   <div className=" col-12">
                     <img
-                      src={require("../assets/images/RecipeIcon/coffee.png")}
+                      src={require('../assets/images/RecipeIcon/coffee.png')}
                       className="w-50 py-2"
                       alt="altTag"
                     />
@@ -226,7 +224,7 @@ class CreateRecipe extends React.Component {
                   </div>
                   <div className=" col-12">
                     <img
-                      src={require("../assets/images/RecipeIcon/water.png")}
+                      src={require('../assets/images/RecipeIcon/water.png')}
                       className="w-50 py-2"
                       alt="altTag"
                     />
@@ -257,7 +255,7 @@ class CreateRecipe extends React.Component {
                   </div>
                   <div className=" col-12">
                     <img
-                      src={require("../assets/images/RecipeIcon/coffee-grinder.png")}
+                      src={require('../assets/images/RecipeIcon/coffee-grinder.png')}
                       className="w-50 py-2"
                       alt="altTag"
                     />
@@ -293,7 +291,7 @@ class CreateRecipe extends React.Component {
                   </div>
                   <div className=" col-12">
                     <img
-                      src={require("../assets/images/RecipeIcon/thermometer.png")}
+                      src={require('../assets/images/RecipeIcon/thermometer.png')}
                       className="w-50 py-2"
                       alt="altTag"
                     />
@@ -396,7 +394,7 @@ class CreateRecipe extends React.Component {
                 aftertaste: this.state.aftertaste,
                 balance: this.state.balance,
                 globalTaste: this.state.globalTaste,
-                body: this.state.body
+                body: this.state.body,
               }}
             />
 
@@ -404,7 +402,7 @@ class CreateRecipe extends React.Component {
               <div className="row">
                 <div className="col-3">
                   <label htmlFor="customRange1">
-                    {flavor === "globalTaste" ? "global" : flavor}
+                    {flavor === 'globalTaste' ? 'global' : flavor}
                   </label>
                 </div>
                 <div className="col-9">
@@ -438,5 +436,5 @@ class CreateRecipe extends React.Component {
 
 // export default Steps;
 export default connect(
-  "methods, grinds, flavors, origins, recipeDetails, backButton"
+  'methods, grinds, flavors, origins, recipeDetails, backButton',
 )(CreateRecipe);

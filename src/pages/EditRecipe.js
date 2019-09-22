@@ -1,28 +1,27 @@
-import React from "react";
+import React from 'react';
 
 // import store
-import { connect } from "unistore/react";
-import actionsRecipes from "../store/actionsRecipes";
+import { connect } from 'unistore/react';
+import actionsRecipes from '../store/actionsRecipes';
 
 // import components
-import Radar from "../components/radarRecipe";
-import { JsxEmit } from "typescript";
+import Radar from '../components/RadarRecipe';
 
 class CreateRecipe extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
+      name: '',
       methodID: 1,
       difficulty: 1,
-      coffeeWeight: "",
-      water: "",
+      coffeeWeight: '',
+      water: '',
       grindSize: 1,
-      waterTemp: "",
-      beanName: "",
+      waterTemp: '',
+      beanName: '',
       originID: 1,
-      beanProcess: "",
-      beanRoasting: "",
+      beanProcess: '',
+      beanRoasting: '',
       fragrance: 0.5,
       aroma: 0.5,
       cleanliness: 0.5,
@@ -33,54 +32,53 @@ class CreateRecipe extends React.Component {
       balance: 0.5,
       globalTaste: 0.5,
       body: 0.5,
-      recipeDataTeporary: []
+      recipeDataTeporary: [],
     };
   }
 
   componentDidMount = async () => {
-      await this.setState({
-        recipeDataTeporary: {
-          ...JSON.parse(sessionStorage.getItem("Recipe")),
-          ...JSON.parse(sessionStorage.getItem("RecipeDetail"))
-        }
-      });
-      await this.setState({
-        name: this.state.recipeDataTeporary.name,
-        methodID: this.state.recipeDataTeporary.methodID,
-        difficulty: this.state.recipeDataTeporary.difficulty,
-        coffeeWeight: this.state.recipeDataTeporary.coffeeWeight,
-        water: this.state.recipeDataTeporary.water,
-        grindSize: this.state.recipeDataTeporary.grindSize,
-        waterTemp: this.state.recipeDataTeporary.waterTemp,
-        beanName: this.state.recipeDataTeporary.beanName,
-        originID: this.state.recipeDataTeporary.originID,
-        beanProcess: this.state.recipeDataTeporary.beanProcess,
-        beanRoasting: this.state.recipeDataTeporary.beanRoasting,
-        fragrance: this.state.recipeDataTeporary.fragrance,
-        aroma: this.state.recipeDataTeporary.aroma,
-        cleanliness: this.state.recipeDataTeporary.cleanliness,
-        sweetness: this.state.recipeDataTeporary.sweetness,
-        taste: this.state.recipeDataTeporary.taste,
-        acidity: this.state.recipeDataTeporary.acidity,
-        aftertaste: this.state.recipeDataTeporary.aftertaste,
-        balance: this.state.recipeDataTeporary.balance,
-        globalTaste: this.state.recipeDataTeporary.globalTaste,
-        body: this.state.recipeDataTeporary.body
-      });
-    
+    await this.setState({
+      recipeDataTeporary: {
+        ...JSON.parse(sessionStorage.getItem('Recipe')),
+        ...JSON.parse(sessionStorage.getItem('RecipeDetail')),
+      },
+    });
+    await this.setState({
+      name: this.state.recipeDataTeporary.name,
+      methodID: this.state.recipeDataTeporary.methodID,
+      difficulty: this.state.recipeDataTeporary.difficulty,
+      coffeeWeight: this.state.recipeDataTeporary.coffeeWeight,
+      water: this.state.recipeDataTeporary.water,
+      grindSize: this.state.recipeDataTeporary.grindSize,
+      waterTemp: this.state.recipeDataTeporary.waterTemp,
+      beanName: this.state.recipeDataTeporary.beanName,
+      originID: this.state.recipeDataTeporary.originID,
+      beanProcess: this.state.recipeDataTeporary.beanProcess,
+      beanRoasting: this.state.recipeDataTeporary.beanRoasting,
+      fragrance: this.state.recipeDataTeporary.fragrance,
+      aroma: this.state.recipeDataTeporary.aroma,
+      cleanliness: this.state.recipeDataTeporary.cleanliness,
+      sweetness: this.state.recipeDataTeporary.sweetness,
+      taste: this.state.recipeDataTeporary.taste,
+      acidity: this.state.recipeDataTeporary.acidity,
+      aftertaste: this.state.recipeDataTeporary.aftertaste,
+      balance: this.state.recipeDataTeporary.balance,
+      globalTaste: this.state.recipeDataTeporary.globalTaste,
+      body: this.state.recipeDataTeporary.body,
+    });
   };
 
-  handleChangeRecipe = event => {
+  handleChangeRecipe = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  handleChangeRecipeDetail = event => {
+  handleChangeRecipeDetail = (event) => {
     this.setState({ [event.target.name]: parseFloat(event.target.value) });
   };
 
-  submitRecipe = async event => {
+  submitRecipe = async (event) => {
     await sessionStorage.setItem(
-      "Recipe",
+      'Recipe',
       JSON.stringify({
         name: this.state.name,
         methodID: this.state.methodID,
@@ -90,11 +88,11 @@ class CreateRecipe extends React.Component {
         beanRoasting: this.state.beanRoasting,
         difficulty: this.state.difficulty,
         coffeeWeight: this.state.coffeeWeight,
-        water: this.state.water
-      })
+        water: this.state.water,
+      }),
     );
     await sessionStorage.setItem(
-      "RecipeDetail",
+      'RecipeDetail',
       JSON.stringify({
         fragrance: this.state.fragrance,
         aroma: this.state.aroma,
@@ -107,11 +105,11 @@ class CreateRecipe extends React.Component {
         globalTaste: this.state.globalTaste,
         body: this.state.body,
         grindSize: this.state.grindSize,
-        waterTemp: this.state.waterTemp
-      })
+        waterTemp: this.state.waterTemp,
+      }),
     );
     this.props.history.push(
-      `/recipe/edit/addstep/${this.props.match.params.recipeID}`
+      `/recipe/edit/addstep/${this.props.match.params.recipeID}`,
     );
   };
 
@@ -121,11 +119,12 @@ class CreateRecipe extends React.Component {
         <img
           className="backbutton"
           src={this.props.backButton}
-          onClick={event =>
+          onClick={(event) =>
             this.props.history.push(
-              `/recipe/${this.props.match.params.recipeID}`
+              `/recipe/${this.props.match.params.recipeID}`,
             )
           }
+          alt="backButton"
         />
         <div className="container">
           <form onSubmit={this.submitRecipe}>
@@ -193,7 +192,7 @@ class CreateRecipe extends React.Component {
                   </div>
                   <div className=" col-12">
                     <img
-                      src={require("../assets/images/RecipeIcon/coffee.png")}
+                      src={require('../assets/images/RecipeIcon/coffee.png')}
                       className="w-50 py-2"
                       alt="altTag"
                     />
@@ -224,7 +223,7 @@ class CreateRecipe extends React.Component {
                   </div>
                   <div className=" col-12">
                     <img
-                      src={require("../assets/images/RecipeIcon/water.png")}
+                      src={require('../assets/images/RecipeIcon/water.png')}
                       className="w-50 py-2"
                       alt="altTag"
                     />
@@ -255,7 +254,7 @@ class CreateRecipe extends React.Component {
                   </div>
                   <div className=" col-12">
                     <img
-                      src={require("../assets/images/RecipeIcon/coffee-grinder.png")}
+                      src={require('../assets/images/RecipeIcon/coffee-grinder.png')}
                       className="w-50 py-2"
                       alt="altTag"
                     />
@@ -291,7 +290,7 @@ class CreateRecipe extends React.Component {
                   </div>
                   <div className=" col-12">
                     <img
-                      src={require("../assets/images/RecipeIcon/thermometer.png")}
+                      src={require('../assets/images/RecipeIcon/thermometer.png')}
                       className="w-50 py-2"
                       alt="altTag"
                     />
@@ -395,7 +394,7 @@ class CreateRecipe extends React.Component {
                 aftertaste: this.state.aftertaste,
                 balance: this.state.balance,
                 globalTaste: this.state.globalTaste,
-                body: this.state.body
+                body: this.state.body,
               }}
             />
 
@@ -435,6 +434,6 @@ class CreateRecipe extends React.Component {
 
 // export default Steps;
 export default connect(
-  "methods, grinds, flavors, origins, recipeDetails, backButton, recipe, stepTypes, recipeSteps, waterLimit, backButton, recipeCreator, reviews, userMe",
-  actionsRecipes
+  'methods, grinds, flavors, origins, recipeDetails, backButton, recipe, stepTypes, recipeSteps, waterLimit, backButton, recipeCreator, reviews, userMe',
+  actionsRecipes,
 )(CreateRecipe);

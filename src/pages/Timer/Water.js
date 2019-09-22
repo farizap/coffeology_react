@@ -2,6 +2,7 @@ import React from 'react';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
+// component that show circular progress of water in step running now
 function Water(props) {
   return (
     <div>

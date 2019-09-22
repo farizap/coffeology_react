@@ -1,40 +1,41 @@
 import axios from 'axios';
-import Swal from 'sweetalert2';
+
+// eslint-disable-next-line
 import store from './store';
 
-const Toast = Swal.mixin({
-  toast: true,
-  position: 'center',
-  showConfirmButton: false,
-  timer: 2000,
-});
-
 const actionsDemo = (store) => ({
-  // setter data
+  // setter timer state
   setTimer(state, value) {
     if (value === 0) {
       return { stepIndex: store.getState().stepIndex + 1 };
     }
     return { timerNow: value };
   },
+  // setter stepIndex state
   setStepIndex(state, value) {
     return { stepIndex: value };
   },
+  // setter waterNow state
   setWaterNow(state, value) {
     return { waterNow: value };
   },
+  // setter timerNow state
   setTimerNow(state, value) {
     return { timerNow: value };
   },
+  // setter stepWater state
   setStepWater(state, value) {
     return { stepWater: value };
   },
+  // setter stepTime state
   setStepTime(state, value) {
     return { stepTime: value };
   },
+  // setter waterLimit state
   setWaterLimit(state, value) {
     return { waterLimit: value };
   },
+  // reset state associated with recipe demo
   setResetTimer(state) {
     store.setState({ timerNow: 0 });
     store.setState({ stepIndex: 0 });
@@ -48,6 +49,7 @@ const actionsDemo = (store) => ({
     return { recipeSteps: recipeStepsShifted };
   },
 
+  // make request with axios to post history
   async postHistory(state, data) {
     const config = {
       method: 'post',
@@ -64,7 +66,7 @@ const actionsDemo = (store) => ({
       })
       .catch((error) => console.log('Error postHistory', error));
   },
-
+  // make request with axios to post review
   async postReview(state, data) {
     const config = {
       method: 'post',
@@ -75,7 +77,7 @@ const actionsDemo = (store) => ({
       },
     };
     await axios(config)
-      .then((response) => { })
+      .then((response) => {})
       .catch((error) => {
         console.log('Error postReview', error);
         /* eslint-enable no-console */

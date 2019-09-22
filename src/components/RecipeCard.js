@@ -1,6 +1,8 @@
 import React from 'react';
 
 function recipeCard(props) {
+  
+  // to show difficulty in recipe card
   const showDifficulty = (level) => {
     if (level === 1) {
       return (
@@ -13,7 +15,8 @@ function recipeCard(props) {
           <span>MUDAH</span>
         </div>
       );
-    } if (level === 2) {
+    }
+    if (level === 2) {
       return (
         <div className="col-6 align-self-center text-left pt-1">
           <img
@@ -24,7 +27,8 @@ function recipeCard(props) {
           <span>SEDANG</span>
         </div>
       );
-    } if (level === 3) {
+    }
+    if (level === 3) {
       return (
         <div className="col-6 align-self-center text-left pt-1">
           <img
@@ -63,9 +67,7 @@ function recipeCard(props) {
             {props.pageType === 'pageMyBrew' ? (
               <div className="row pb-1">
                 <h6 className="mb-0 pl-2">
-                                    Dibuat :
-                  {' '}
-                  {props.data.createdAt.slice(0, -14)}
+                  Dibuat : {props.data.createdAt.slice(0, -14)}
                 </h6>
               </div>
             ) : (
@@ -74,33 +76,29 @@ function recipeCard(props) {
             <div className="row">
               <div className="col-12 align-self-center text-center pl-2 pt-1">
                 <h6 className="bgcolor1 text-light rounded py-1 mb-0">
-                                    Diseduh :
-                  {' '}
-                  {props.data.brewCount}
-                  {' '}
-x
+                  Diseduh : {props.data.brewCount} x
                 </h6>
               </div>
               {showDifficulty(props.data.difficulty)}
               <div className="col-4 align-self-center px-0 py-0">
-                {[1, 2, 3, 4, 5].map((number) => (number <= Math.round(props.data.rating) ? (
-                  <img
-                    src={require('../assets/images/RecipeIcon/star1.png')}
-                    className="starrating"
-                    alt="alt tag"
-                  />
-                ) : (
-                  <img
-                    src={require('../assets/images/RecipeIcon/star0.png')}
-                    className="starrating"
-                    alt="alt tag"
-                  />
-                )))}
+                {[1, 2, 3, 4, 5].map((number) =>
+                  number <= Math.round(props.data.rating) ? (
+                    <img
+                      src={require('../assets/images/RecipeIcon/star1.png')}
+                      className="starrating"
+                      alt="alt tag"
+                    />
+                  ) : (
+                    <img
+                      src={require('../assets/images/RecipeIcon/star0.png')}
+                      className="starrating"
+                      alt="alt tag"
+                    />
+                  ),
+                )}
               </div>
               <div className="col-2 align-self-center text-left pl-1 pt-1">
-                                [
-                {String(props.data.rating).slice(0, 3)}
-]
+                [{String(props.data.rating).slice(0, 3)}]
               </div>
             </div>
           </div>
@@ -147,11 +145,7 @@ x
               className="w-25 mr-1"
               alt="alt tag"
             />
-            <span className="text-muted h6">
-              {' '}
-              {props.time}
-              {' '}
-            </span>
+            <span className="text-muted h6"> {props.time} </span>
           </div>
           <div className="col-4 text-center px-0">
             <img
@@ -161,9 +155,7 @@ x
             />
             <span className="text-muted h6">
               {' '}
-              {props.data.coffeeWeight}
-              {' '}
-gram
+              {props.data.coffeeWeight} gram
             </span>
           </div>
           <div className="col-4 text-center px-0">
@@ -172,12 +164,7 @@ gram
               className="w-25 mr-1"
               alt="alt tag"
             />
-            <span className="text-muted h6">
-              {' '}
-              {props.data.water}
-              {' '}
-ml
-            </span>
+            <span className="text-muted h6"> {props.data.water} ml</span>
           </div>
         </div>
       </div>

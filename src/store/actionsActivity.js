@@ -1,16 +1,17 @@
 import axios from 'axios';
+// eslint-disable-next-line
 import store from './store';
-// import Swal from "sweetalert2";
-// import { getThemeProps } from "@material-ui/styles";
 
 const actionsActivity = (store) => ({
-
+  // setter mybrew
   setMyBrew(state, value) {
     return { MyBrew: value };
   },
+  // setter history
   setHistory(state, value) {
     return { history: value };
   },
+  // make request with axios to get history data
   async getHistory(state, paramsInput) {
     const config = {
       method: 'get',
@@ -29,6 +30,7 @@ const actionsActivity = (store) => ({
         console.log('Error getHistory', error);
       });
   },
+  // make request with axios to get myBrew data
   async getMyBrew(state, paramsInput) {
     const config = {
       method: 'get',
@@ -47,7 +49,6 @@ const actionsActivity = (store) => ({
         /* eslint-enable no-console */
       });
   },
-
 });
 
 export default actionsActivity;

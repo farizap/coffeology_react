@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'unistore/react';
 
+// to convert seconds to format minute:second
 const convertSeconds = (secondsInput) => {
   let minutes = Math.floor(parseInt(secondsInput) / 60);
   let seconds = parseInt(secondsInput) - minutes * 60;
@@ -18,17 +19,13 @@ function stepCard(props) {
     <div className="container-fluid stepCard ">
       <div className="row pt-2">
         <div className="col-2 px-0 text-center align-self-start">
-          <h5 className="bg-light p-3 border">
-            {props.data.stepNumber}
-          </h5>
+          <h5 className="bg-light p-3 border">{props.data.stepNumber}</h5>
         </div>
         <div className="col-10 border py-2 pl-2">
           <div className="row">
             <div className="col-3 text-right align-self-center">
               <img
-                src={
-                                    props.stepTypes[props.data.stepTypeID].icon
-                                }
+                src={props.stepTypes[props.data.stepTypeID].icon}
                 className="w-100 bg-light rounded"
                 alt="alt tag"
               />
@@ -36,9 +33,7 @@ function stepCard(props) {
             <div className="col-9 text-left align-self-center">
               <div className="row ">
                 <h5>
-                  {props.stepTypes[
-                    props.data.stepTypeID
-                  ].name.toUpperCase()}
+                  {props.stepTypes[props.data.stepTypeID].name.toUpperCase()}
                 </h5>
               </div>
               <div className="row">
@@ -67,12 +62,7 @@ function stepCard(props) {
                         />
                       </div>
                       <div className="col-9 px-0 text-left align-self-center text-secondary">
-                        {Math.floor(
-                          props.beanRatio
-                                                        * props.data.amount,
-                        )}
-                        {' '}
-                                                ml
+                        {Math.floor(props.beanRatio * props.data.amount)} ml
                       </div>
                     </div>
                   ) : (

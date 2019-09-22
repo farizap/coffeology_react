@@ -14,13 +14,11 @@ import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 // import component
 
-import History from '../components/history';
-import MyBrew from '../components/myBrew';
+import History from '../components/History';
+import MyBrew from '../components/MyBrew';
 
 function TabPanel(props) {
-  const {
-    children, value, index, ...other
-  } = props;
+  const { children, value, index, ...other } = props;
 
   return (
     <Typography
@@ -37,7 +35,6 @@ function TabPanel(props) {
 }
 
 TabPanel.propTypes = {
-  children: PropTypes.node,
   index: PropTypes.any.isRequired,
   value: PropTypes.any.isRequired,
 };
@@ -60,27 +57,28 @@ const useStyles = makeStyles((theme) => ({
 
 const useStylesFab = makeStyles((theme) => ({
   fab: {
-    // margin: theme.spacing(1)
     position: 'fixed',
     bottom: '90px',
-    marginLeft: '150px',
+    center: '0px',
+    marginRight: '-15px',
   },
-  extendedIcon: {
-    marginRight: theme.spacing(1),
-  },
+  // extendedIcon: {
+  //   marginRight: theme.spacing(1),
+  // },
 }));
 
-
-export default function FullWidthTabs(props) {
+export default function Activity(props) {
   const classes = useStyles();
   const classesFab = useStylesFab();
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
 
+  // handle change value from Tabs component
   function handleChange(event, newValue) {
     setValue(newValue);
   }
 
+  // handle change value from SwipeableViews component
   function handleChangeIndex(index) {
     setValue(index);
   }
@@ -132,15 +130,10 @@ export default function FullWidthTabs(props) {
             </div>
           </div>
         </div>
-
       </div>
       {value === 0 ? (
         <Link to="/recipes/create">
-          <Fab
-            color="primary"
-            aria-label="add"
-            className={classesFab.fab}
-          >
+          <Fab color="primary" aria-label="add" className={classesFab.fab}>
             <AddIcon />
           </Fab>
         </Link>
@@ -148,6 +141,5 @@ export default function FullWidthTabs(props) {
         <div />
       )}
     </div>
-
   );
 }

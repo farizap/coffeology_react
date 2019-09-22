@@ -1,5 +1,6 @@
 import axios from 'axios';
 import Swal from 'sweetalert2';
+// eslint-disable-next-line
 import store from './store';
 
 const Toast = Swal.mixin({
@@ -14,15 +15,12 @@ const actionsRecipes = (store) => ({
   setListCategory(state, value) {
     return { listCategory: value };
   },
-
   setBeanRatio(state, value) {
     return { beanRatio: value };
   },
-
   setWater(state, value) {
     return { water: value };
   },
-
   setRecipe(state, value) {
     return { recipe: value };
   },
@@ -79,8 +77,9 @@ const actionsRecipes = (store) => ({
   setShowPutRecipe(state, value) {
     return { showPutRecipe: value };
   },
-  // axios
 
+  // axios
+  // post new recipe
   async postRecipe(state, data) {
     const config = {
       method: 'post',
@@ -107,29 +106,32 @@ const actionsRecipes = (store) => ({
         });
       });
   },
+
+  // get all recipe
   async getRecipes(state, paramsInput) {
     const config = {
       method: 'get',
       url: `${store.getState().baseURL}/recipes`,
       params: paramsInput,
     };
-
     await axios(config).then((response) => {
       store.setState({ recipes: response.data.recipes });
     });
   },
+
+  // get recipe by method
   async getRecipesSelection(state, paramsInput) {
     const config = {
       method: 'get',
       url: `${store.getState().baseURL}/recipes`,
       params: paramsInput,
     };
-
     await axios(config).then((response) => {
       store.setState({ recipesSelection: response.data });
     });
   },
 
+  // get recipe at search page
   async searchRecipes(state, filterParams, searchParams, pagination) {
     const paramsInput = filterParams;
     paramsInput.search = searchParams;
@@ -139,7 +141,6 @@ const actionsRecipes = (store) => ({
       url: `${store.getState().baseURL}/recipes`,
       params: paramsInput,
     };
-
     await axios(config)
       .then((response) => {
         /* eslint-disable no-console */
@@ -150,6 +151,29 @@ const actionsRecipes = (store) => ({
         /* eslint-enable no-console */
       });
   },
+
+  // get recipe, recipe detail, recipe step by id
+  async getRecipeByID(state, id) {
+    const config = {
+      method: 'get',
+      url: `${store.getState().baseURL}/recipes/${id}`,
+    };
+
+    await axios(config)
+      .then((response) => {
+        store.setState({
+          recipeDetails: response.data.data.recipeDetails,
+        });
+        store.setState({ recipeSteps: response.data.data.recipeSteps });
+        store.setState({ recipe: response.data.data.recipe });
+        store.setState({ recipeCreator: response.data.data.user });
+      })
+      .catch((error) => {
+        store.setState({ recipe: false });
+      });
+  },
+
+  // edit recipe
   async putRecipe(state, data, id) {
     const config = {
       method: 'put',
@@ -177,70 +201,7 @@ const actionsRecipes = (store) => ({
       });
   },
 
-  // async getRecipes(state, paramsInput = null) {
-  //   let config = {
-  //     method: "get",
-  //     url: store.getState().baseURL + "/recipes"
-  //   };
-
-  //   if (paramsInput !== null) {
-  //     let config = {
-  //       method: "get",
-  //       url: store.getState().baseURL + "/recipes",
-  //       params: paramsInput
-  //     };
-  //   }
-
-  //   await axios(config).then(response => {
-  //     store.setState({ recipes: response.data.data });
-  //   });
-  // },
-  async getRecipeByID(state, id) {
-    const config = {
-      method: 'get',
-      url: `${store.getState().baseURL}/recipes/${id}`,
-    };
-
-    await axios(config)
-      .then((response) => {
-        store.setState({
-          recipeDetails: response.data.data.recipeDetails,
-        });
-        store.setState({ recipeSteps: response.data.data.recipeSteps });
-        store.setState({ recipe: response.data.data.recipe });
-        store.setState({ recipeCreator: response.data.data.user });
-      })
-      .catch((error) => {
-        store.setState({ recipe: false });
-      });
-  },
-  async getReview(state, paramsInput) {
-    const config = {
-      method: 'get',
-      url: `${store.getState().baseURL}/reviews`,
-      params: paramsInput,
-    };
-
-    await axios(config).then((response) => {
-      store.setState({ reviews: response.data.data });
-    });
-  },
-  async getProfile(state) {
-    const config = {
-      method: 'get',
-      url: `${store.getState().baseURL}/users/me`,
-      headers: {
-        Authorization: `Bearer ${sessionStorage.getItem('token')}`,
-      },
-    };
-    await axios(config)
-      .then((response) => {
-        store.setState({ userMe: response.data.data });
-      })
-      .catch((error) => {
-        store.setState({ userMe: false });
-      });
-  },
+  // delete recipe by id
   async deleteRecipe(state, id) {
     const config = {
       method: 'delete',
@@ -265,6 +226,36 @@ const actionsRecipes = (store) => ({
       });
   },
 
+  // get review of recipe
+  async getReview(state, paramsInput) {
+    const config = {
+      method: 'get',
+      url: `${store.getState().baseURL}/reviews`,
+      params: paramsInput,
+    };
+
+    await axios(config).then((response) => {
+      store.setState({ reviews: response.data.data });
+    });
+  },
+
+  // get user profile
+  async getProfile(state) {
+    const config = {
+      method: 'get',
+      url: `${store.getState().baseURL}/users/me`,
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+      },
+    };
+    await axios(config)
+      .then((response) => {
+        store.setState({ userMe: response.data.data });
+      })
+      .catch((error) => {
+        store.setState({ userMe: false });
+      });
+  },
 });
 
 export default actionsRecipes;

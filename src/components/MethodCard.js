@@ -12,18 +12,6 @@ function methodCard(props) {
         </div>
       </div>
     </div>
-  // <div className="container-fluid methodCard shadow">
-  //     <div className="row">
-  //         <div className="col-12  text-center p-0 ">
-  //             <img src={props.icon} className="w-100" alt="altTag" />
-  //         </div>
-  //         <div className="col-12  text-center py-3 ">
-  //             <span className="py-1 border-top border-bottom">
-  //                 {props.name}
-  //             </span>
-  //         </div>
-  //     </div>
-  // </div>
   );
 }
 

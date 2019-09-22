@@ -1,24 +1,22 @@
-import React from "react";
-import { Modal, Button, Form } from "react-bootstrap";
-import { Redirect, Link } from "react-router-dom";
-
+import React from 'react';
+import { Modal, Button, Form } from 'react-bootstrap';
+import { Redirect } from 'react-router-dom';
 // import material ui
-import TextField from "@material-ui/core/TextField";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import IconButton from "@material-ui/core/IconButton";
-import Visibility from "@material-ui/icons/Visibility";
-import VisibilityOff from "@material-ui/icons/VisibilityOff";
-import ButtonUI from "@material-ui/core/Button";
+import TextField from '@material-ui/core/TextField';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import IconButton from '@material-ui/core/IconButton';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
 // import image
-import profileIcon from "../assets/images/profile.png";
-import editProfile from "../assets/images/edit-profile.png";
-import loading from "../assets/images/loading.gif";
+import profileIcon from '../assets/images/profile.png';
+import editProfile from '../assets/images/edit-profile.png';
+import loading from '../assets/images/loading.gif';
 
 // import store
-import { connect } from "unistore/react";
-import actionsProfile from "../store/actionsProfile";
-import useStyles from "../store/style";
+import { connect } from 'unistore/react';
+import actionsProfile from '../store/actionsProfile';
+import useStyles from '../store/style';
 
 class Profile extends React.Component {
   constructor(props) {
@@ -28,8 +26,8 @@ class Profile extends React.Component {
       editPasswordView: false,
       showPasswordOld: false,
       showPasswordNew: false,
-      passwordOld: "",
-      passwordNew: ""
+      passwordOld: '',
+      passwordNew: '',
     };
     this.name = React.createRef();
     this.bio = React.createRef();
@@ -39,16 +37,16 @@ class Profile extends React.Component {
   }
 
   componentDidMount = () => {
-    if (sessionStorage.getItem("token") === null) {
-      return <Redirect to={{ pathname: "/login" }} />;
+    if (sessionStorage.getItem('token') === null) {
+      return <Redirect to={{ pathname: '/login' }} />;
     } else {
       this.props.getProfile();
     }
   };
 
   componentWillUnmount = () => {
-    this.props.setDataUserMe(null)
-  }
+    this.props.setDataUserMe(null);
+  };
 
   // handle show hide modal
   handleChangeView = async (e, state, value) => {
@@ -57,11 +55,11 @@ class Profile extends React.Component {
   };
 
   // handle edit name and bio
-  handleSubmitProfile = async e => {
+  handleSubmitProfile = async (e) => {
     e.preventDefault();
     let data = {
       name: this.name.current.value,
-      bio: this.bio.current.value
+      bio: this.bio.current.value,
     };
     await this.props.editProfile(data);
     // if data is not valid
@@ -73,12 +71,12 @@ class Profile extends React.Component {
   };
 
   // handle edit password user
-  handleSubmitPassword = async e => {
+  handleSubmitPassword = async (e) => {
     e.preventDefault();
 
     let data = {
       passwordOld: this.state.passwordOld,
-      passwordNew: this.state.passwordNew
+      passwordNew: this.state.passwordNew,
     };
 
     await this.props.editPassword(data);
@@ -88,75 +86,81 @@ class Profile extends React.Component {
       await this.props.resetChangePasswordStatus();
       data = {
         email: this.props.userMe.email,
-        password: this.state.passwordNew
+        password: this.state.passwordNew,
       };
       await this.props.login(data);
       await this.props.getProfile();
       await this.setState({
         editPasswordView: false,
         showPasswordOld: false,
-        showPasswordNew: false
+        showPasswordNew: false,
       });
     } else {
     }
   };
 
   // handle logout
-  handleLogot = async e => {
+  handleLogot = async (e) => {
     e.preventDefault();
-    sessionStorage.removeItem("token");
+    sessionStorage.removeItem('token');
     this.props.setLogin();
-    this.props.history.push("/");
+    this.props.history.push('/');
   };
 
   render() {
-    if (sessionStorage.getItem("token") === null) {
-      return <Redirect to={{ pathname: "/login" }} />;
-    } 
+    if (sessionStorage.getItem('token') === null) {
+      return <Redirect to={{ pathname: '/login' }} />;
+    }
     // Ade - menghandle page loading dan jika data tidak ada
     else if (this.props.userMe === null) {
       return <img src={loading} alt="loading..." />;
-    } else if (this.props.userMe === false){
+    } else if (this.props.userMe === false) {
       return (
         <div>
           <h3>Data User Tidak Ada, Silahkan Logout Dan Login Kembali</h3>
           <button
-                  onClick={e => this.handleLogot(e)}
-                  type="button"
-                  className="btn btn-primary mb-3"
-                >
-                  Keluar
-                </button>
+            onClick={(e) => this.handleLogot(e)}
+            type="button"
+            className="btn btn-primary mb-3"
+          >
+            Keluar
+          </button>
         </div>
-      )
-    } 
+      );
+    }
     // Ade - End
     else {
       return (
         <div className="container">
           <h4 className="font-weight-bold">PROFILE</h4>
           <div className="row border login_box">
-
             <div className="col-12 py-3" align="center">
-                <img
-                  src={profileIcon}
-                  style={{ borderRadius: "50%", backgroundColor: "#000000" }}
-                  width="100px"
-                /> <br />
-                
+              <img
+                src={profileIcon}
+                style={{ borderRadius: '50%', backgroundColor: '#000000' }}
+                width="100px"
+                alt="profileIcon"
+              />{' '}
+              <br />
               <h4 className="pt-1">
                 {this.props.userMe.name}
-                  <img onClick={e => {
+                <img
+                  onClick={(e) => {
                     e.preventDefault();
                     this.setState({ editProfileView: true });
-                  }} src={editProfile} alt="altTag" width="20px" className="ml-2"></img>
+                  }}
+                  src={editProfile}
+                  alt="altTag"
+                  width="20px"
+                  className="ml-2"
+                ></img>
               </h4>
               <span className="text-justify">{this.props.userMe.bio}</span>
             </div>
             <div
               className="col-md-6 col-xs-6 border btn btn-orange"
               align="center"
-              onClick={e => this.props.history.push("/activity")}
+              onClick={(e) => this.props.history.push('/activity')}
             >
               <h5>
                 {this.props.userMe.brewCount} <br /> <span>Brew</span>
@@ -165,7 +169,7 @@ class Profile extends React.Component {
             <div
               className="col-md-6 col-xs-6 border btn btn-orange"
               align="center"
-              onClick={e => this.props.history.push("/activity")}
+              onClick={(e) => this.props.history.push('/activity')}
             >
               <h5>
                 {this.props.userMe.recipeCount} <br /> <span>Resep</span>
@@ -177,7 +181,7 @@ class Profile extends React.Component {
                 <button
                   type="button"
                   className="btn btn-primary"
-                  onClick={e => {
+                  onClick={(e) => {
                     e.preventDefault();
                     this.setState({ editPasswordView: true });
                   }}
@@ -188,7 +192,7 @@ class Profile extends React.Component {
               </div>
               <div align="left">
                 <button
-                  onClick={e => this.handleLogot(e)}
+                  onClick={(e) => this.handleLogot(e)}
                   type="button"
                   className="btn btn-primary mb-3"
                 >
@@ -232,7 +236,7 @@ class Profile extends React.Component {
                 <Modal.Footer>
                   <Button
                     variant="secondary"
-                    onClick={e => {
+                    onClick={(e) => {
                       e.preventDefault();
                       this.setState({ editProfileView: false });
                     }}
@@ -247,7 +251,6 @@ class Profile extends React.Component {
             </Modal.Body>
           </Modal>
 
-      
           <Modal show={this.state.editPasswordView}>
             <Modal.Header>
               <Modal.Title>Current Password</Modal.Title>
@@ -262,8 +265,8 @@ class Profile extends React.Component {
                   name="passwordold"
                   label="Current Password"
                   id="passwordold"
-                  type={this.state.showPasswordOld ? "text" : "password"}
-                  onChange={e => {
+                  type={this.state.showPasswordOld ? 'text' : 'password'}
+                  onChange={(e) => {
                     e.preventDefault();
                     this.setState({ passwordOld: e.target.value });
                   }}
@@ -273,13 +276,13 @@ class Profile extends React.Component {
                       <InputAdornment position="end">
                         <IconButton
                           aria-label="toggle password visibility"
-                          onClick={e => {
+                          onClick={(e) => {
                             e.preventDefault();
                             this.setState({
-                              showPasswordOld: !this.state.showPasswordOld
+                              showPasswordOld: !this.state.showPasswordOld,
                             });
                           }}
-                          onMouseDown={e => e.preventDefault()}
+                          onMouseDown={(e) => e.preventDefault()}
                         >
                           {this.state.showPasswordOld ? (
                             <Visibility />
@@ -288,9 +291,9 @@ class Profile extends React.Component {
                           )}
                         </IconButton>
                       </InputAdornment>
-                    )
+                    ),
                   }}
-                />{" "}
+                />{' '}
                 <TextField
                   variant="outlined"
                   margin="normal"
@@ -299,8 +302,8 @@ class Profile extends React.Component {
                   name="passwordnew"
                   label="New Password"
                   id="passwordnew"
-                  type={this.state.showPasswordNew ? "text" : "password"}
-                  onChange={e => {
+                  type={this.state.showPasswordNew ? 'text' : 'password'}
+                  onChange={(e) => {
                     e.preventDefault();
                     this.setState({ passwordNew: e.target.value });
                   }}
@@ -310,13 +313,13 @@ class Profile extends React.Component {
                       <InputAdornment position="end">
                         <IconButton
                           aria-label="toggle password visibility"
-                          onClick={e => {
+                          onClick={(e) => {
                             e.preventDefault();
                             this.setState({
-                              showPasswordNew: !this.state.showPasswordNew
+                              showPasswordNew: !this.state.showPasswordNew,
                             });
                           }}
-                          onMouseDown={e => e.preventDefault()}
+                          onMouseDown={(e) => e.preventDefault()}
                         >
                           {this.state.showPasswordNew ? (
                             <Visibility />
@@ -325,13 +328,13 @@ class Profile extends React.Component {
                           )}
                         </IconButton>
                       </InputAdornment>
-                    )
+                    ),
                   }}
                 />
                 <Modal.Footer>
                   <Button
                     variant="secondary"
-                    onClick={e => {
+                    onClick={(e) => {
                       e.preventDefault();
                       this.setState({ editPasswordView: false });
                     }}
@@ -352,7 +355,7 @@ class Profile extends React.Component {
 }
 
 export default connect(
-  "userMe, changePasswordStatus, Toast, editProfileStatus",
+  'userMe, changePasswordStatus, Toast, editProfileStatus',
   actionsProfile,
-  useStyles
+  useStyles,
 )(Profile);

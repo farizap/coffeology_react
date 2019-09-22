@@ -1,6 +1,6 @@
-import React from "react";
-import Rating from "@material-ui/lab/Rating";
-import Typography from "@material-ui/core/Typography";
+import React from 'react';
+import Rating from '@material-ui/lab/Rating';
+import Typography from '@material-ui/core/Typography';
 
 import {
   FacebookShareButton,
@@ -8,46 +8,45 @@ import {
   TwitterShareButton,
   WhatsappShareButton,
   LinkedinShareButton,
-  LineShareButton
-} from "react-share";
+  LineShareButton,
+} from 'react-share';
 import {
   FacebookIcon,
   TelegramIcon,
   TwitterIcon,
   WhatsappIcon,
   LinkedinIcon,
-  LineIcon
-} from "react-share";
+  LineIcon,
+} from 'react-share';
 
-import { connect } from "unistore/react";
-import actionsDemo from "../store/actionsDemo";
+import { connect } from 'unistore/react';
+import actionsDemo from '../store/actionsDemo';
 
 class Review extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      content: "",
-      rating: "",
-      photo: "",
+      content: '',
+      rating: '',
+      photo: '',
       ratingLabels: {
-        1: "USELESS",
-        2: "POOR",
-        3: "OK",
-        4: "GOOD",
-        5: "EXCELENT"
+        1: 'SANGAT BURUK',
+        2: 'BURUK',
+        3: 'OK',
+        4: 'BAGUS',
+        5: 'SANGAN BAGUS',
       },
-      rating: 3,
-      review: {}
+      review: {},
     };
   }
 
-  handleChange = event => {
-    this.setState(
-      { [event.target.name]: event.target.value },
-    );
+  // handle form input change
+  handleChange = (event) => {
+    this.setState({ [event.target.name]: event.target.value });
   };
 
-  submitReview = async event => {
+  // handle when submit button press
+  submitReview = async (event) => {
     event.preventDefault();
     this.setState(
       {
@@ -56,20 +55,21 @@ class Review extends React.Component {
           historyID: this.props.historyID,
           content: this.state.content,
           rating: this.state.rating,
-          photo: this.state.photo
-        }
+          photo: this.state.photo,
+        },
       },
       async () => {
-
+        // post review and push to /activity
         await this.props.postReview(this.state.review);
-        await this.props.history.push("/activity");
-      }
+        await this.props.history.push('/activity');
+      },
     );
   };
 
+  // remove sessionStorage assosiated with recipe
   componentWillUnmount() {
-    sessionStorage.removeItem("RecipeDetail");
-    sessionStorage.removeItem("Recipe");
+    sessionStorage.removeItem('RecipeDetail');
+    sessionStorage.removeItem('Recipe');
   }
 
   render() {
@@ -121,43 +121,43 @@ class Review extends React.Component {
           <FacebookShareButton
             children={<FacebookIcon size={50} round={true} />}
             url={
-              "http://coffeology.shop/recipe/" +
+              'http://coffeology.shop/recipe/' +
               this.props.match.params.recipeID
             }
           />
           <TelegramShareButton
             children={<TelegramIcon size={50} round={true} />}
             url={
-              "Resep dari coffeology ini baru saja kucoba " +
-              "http://coffeology.shop/recipe/" +
+              'Resep dari coffeology ini baru saja kucoba ' +
+              'http://coffeology.shop/recipe/' +
               this.props.match.params.recipeID
             }
           />
           <TwitterShareButton
             children={<TwitterIcon size={50} round={true} />}
             url={
-              "http://coffeology.shop/recipe/" +
+              'http://coffeology.shop/recipe/' +
               this.props.match.params.recipeID
             }
           />
           <WhatsappShareButton
             children={<WhatsappIcon size={50} round={true} />}
             url={
-              "http://coffeology.shop/recipe/" +
+              'http://coffeology.shop/recipe/' +
               this.props.match.params.recipeID
             }
           />
           <LinkedinShareButton
             children={<LinkedinIcon size={50} round={true} />}
             url={
-              "http://coffeology.shop/recipe/" +
+              'http://coffeology.shop/recipe/' +
               this.props.match.params.recipeID
             }
           />
           <LineShareButton
             children={<LineIcon size={50} round={true} />}
             url={
-              "http://coffeology.shop/recipe/" +
+              'http://coffeology.shop/recipe/' +
               this.props.match.params.recipeID
             }
           />
@@ -168,7 +168,7 @@ class Review extends React.Component {
               src={this.props.homeButton}
               alt=""
               className="homebutton w-75"
-              onClick={event => this.props.history.push("/")}
+              onClick={(event) => this.props.history.push('/')}
             />
           </div>
         </div>
@@ -178,6 +178,6 @@ class Review extends React.Component {
 }
 
 export default connect(
-  "historyID, menuButton, homeButton",
-  actionsDemo
+  'historyID, menuButton, homeButton',
+  actionsDemo,
 )(Review);

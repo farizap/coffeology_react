@@ -1,25 +1,26 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 // import store
-import { connect } from "unistore/react";
-import actionsRecipes from "../store/actionsRecipes";
+import { connect } from 'unistore/react';
+import actionsRecipes from '../store/actionsRecipes';
 
 // import component
-import RecipeCard from "../components/recipeCard";
-import Pagination from "react-bootstrap/Pagination";
-import loading from "../assets/images/loading.gif";
+import RecipeCard from '../components/RecipeCard';
+import Pagination from 'react-bootstrap/Pagination';
+import loading from '../assets/images/loading.gif';
 
-const _ = require("lodash");
+const _ = require('lodash');
 
 class RecipesSelection extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      pagination: 1
+      pagination: 1,
     };
   }
 
+  // convert input in seconds to string with format 'minute:seconds
   convertSeconds(secondsInput) {
     let minutes = Math.floor(parseInt(secondsInput) / 60);
     let seconds = parseInt(secondsInput) - minutes * 60;
@@ -33,31 +34,35 @@ class RecipesSelection extends React.Component {
   }
 
   async componentDidMount() {
+    // get recipe by methodID from param in endpoint and page right now
     await this.props.getRecipesSelection({
       methodID: this.props.match.params.methodID,
-      p: this.state.pagination
+      p: this.state.pagination,
     });
   }
 
+  // reset props in store
   componentWillUnmount() {
     this.props.setRecipesSelection(null);
   }
 
-  handlePreviousPageButton = event => {
+  // handle change page button
+  handlePreviousPageButton = (event) => {
     event.preventDefault();
     this.setState({ pagination: this.state.pagination - 1 }, () => {
       this.props.getRecipesSelection({
         methodID: this.props.match.params.methodID,
-        p: this.state.pagination
+        p: this.state.pagination,
       });
     });
   };
-  handleNextPageButton = event => {
+  // handle change page button
+  handleNextPageButton = (event) => {
     event.preventDefault();
     this.setState({ pagination: this.state.pagination + 1 }, () => {
       this.props.getRecipesSelection({
         methodID: this.props.match.params.methodID,
-        p: this.state.pagination
+        p: this.state.pagination,
       });
     });
   };
@@ -71,10 +76,10 @@ class RecipesSelection extends React.Component {
       return (
         <div>
           <h3 className="font-weight-bold">RECIPES SELECTION</h3>
-          {this.props.recipesSelection.recipes.map(value => {
+          {this.props.recipesSelection.recipes.map((value) => {
             return (
               <div className="col-12">
-                <Link to={"/recipe/" + value.id}>
+                <Link to={'/recipe/' + value.id}>
                   <RecipeCard
                     data={value}
                     method={
@@ -91,14 +96,14 @@ class RecipesSelection extends React.Component {
             {this.props.recipesSelection.pageNow === 1 ? (
               <span></span>
             ) : (
-                <Pagination.First onClick={this.handlePreviousPageButton} />
-              )}
+              <Pagination.First onClick={this.handlePreviousPageButton} />
+            )}
             {this.props.recipesSelection.pageNow ===
-              this.props.recipesSelection.pageTotal ? (
-                <span></span>
-              ) : (
-                <Pagination.Last onClick={this.handleNextPageButton} />
-              )}
+            this.props.recipesSelection.pageTotal ? (
+              <span></span>
+            ) : (
+              <Pagination.Last onClick={this.handleNextPageButton} />
+            )}
           </Pagination>
         </div>
       );
@@ -107,6 +112,6 @@ class RecipesSelection extends React.Component {
 }
 //
 export default connect(
-  "recipesSelection, methods",
-  actionsRecipes
+  'recipesSelection, methods',
+  actionsRecipes,
 )(RecipesSelection);

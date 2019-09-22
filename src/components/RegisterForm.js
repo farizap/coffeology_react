@@ -18,6 +18,7 @@ const RegisterForm = (props) => {
     showPassword: false,
   });
 
+  // parse props
   const {
     values: { name, email, password },
     errors,
@@ -28,11 +29,14 @@ const RegisterForm = (props) => {
     setFieldTouched,
   } = props;
 
+  // handle onChange in input form
   const change = (name, e) => {
     e.persist();
     handleChange(e);
     setFieldTouched(name, true, false);
   };
+
+  // handle show/hide password form
   const handleClickShowPassword = () => {
     setValues({ ...values, showPassword: !values.showPassword });
   };
@@ -47,7 +51,6 @@ const RegisterForm = (props) => {
         required
         variant="outlined"
         margin="normal"
-        required
         fullWidth
         id="email"
         label="Email"
@@ -63,7 +66,6 @@ const RegisterForm = (props) => {
         required
         variant="outlined"
         margin="normal"
-        required
         fullWidth
         name="name"
         label="Nama"
@@ -77,12 +79,10 @@ const RegisterForm = (props) => {
         required
         variant="outlined"
         margin="normal"
-        required
         fullWidth
         value={password}
         name="password"
         label="Kata sandi"
-        type="password"
         id="password"
         onChange={change.bind(null, 'password')}
         autoComplete="current-password"

@@ -28,10 +28,7 @@ const validationSchema = Yup.object({
     .email('Email tidak valid')
     .required('Email tidak boleh kosong'),
   password: Yup.string('')
-    .min(
-      6,
-      'Gunakan huruf besar, huruf kecil dan angka. Minimal 6 karakter.',
-    )
+    .min(6, 'Gunakan huruf besar, huruf kecil dan angka. Minimal 6 karakter.')
     .matches(
       /^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])[\w\d]{6,30}$/,
       'Gunakan huruf besar, huruf kecil dan angka. Minimal 6 karakter.',
@@ -80,6 +77,7 @@ const Register = (props) => {
   });
 
   return (
+
     <div>
       <img
         className="backbutton "
@@ -93,7 +91,7 @@ const Register = (props) => {
             <HumanHandsup />
           </Avatar>
           <Typography component="h1" variant="h5">
-                        Register
+            Register
           </Typography>
           <Formik
             initialValues={dataRegister}
@@ -104,6 +102,7 @@ const Register = (props) => {
         </div>
       </Container>
     </div>
+
   );
 };
 

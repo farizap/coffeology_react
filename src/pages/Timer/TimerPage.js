@@ -5,10 +5,9 @@ import SkipNextIcon from '@material-ui/icons/SkipNext';
 import Fab from '@material-ui/core/Fab';
 import actionsDemo from '../../store/actionsDemo';
 
-import Timer from './timer';
-import TimerButton from './timerButton';
+import Timer from './Timer';
+import TimerButton from './TimerButton';
 import RecipeSteps from './RecipeSteps';
-import RecipeStepNow from './RecipeStepNow';
 import WaterBar from './WaterBar';
 import Water from './Water';
 
@@ -21,12 +20,11 @@ function Counter(props) {
     waterTotal: 0,
     recipeSteps: JSON.parse(sessionStorage.getItem('recipeSteps')),
   });
-  const [delay, setDelay] = useState(100);
   const [isRunning, setIsRunning] = useState(false);
 
   useInterval(
     async () => {
-      // Your custom logic here
+      // setTimer change 3 state(timeNow, waterNow, waterTotal) in every interval
       setTimer({
         ...timer,
         timeNow: timer.timeNow - 1,
@@ -35,9 +33,12 @@ function Counter(props) {
         waterTotal:
           timer.waterTotal + timer.stepNow.amount / timer.stepNow.time / 10,
       });
+
+      // check if there is no steps remaining and timeNow is zero. redirect to review page
+      // else if timeNow is zero, timeNow change to next steps
       if (
-        timer.recipeSteps[timer.stepIndex + 1] === undefined
-        && timer.timeNow === 0
+        timer.recipeSteps[timer.stepIndex + 1] === undefined &&
+        timer.timeNow === 0
       ) {
         props.history.push(`/recipe/review/${props.match.params.recipeID}`);
       } else if (timer.timeNow === 0) {
@@ -50,18 +51,21 @@ function Counter(props) {
         });
       }
     },
-    isRunning ? delay : null,
+    isRunning ? 100 : null,
   );
 
-  useEffect(() => () => {
-  }, []);
+  useEffect(() => () => {}, []);
 
+  // change isRuninng state, if isRunning state is false, timer is stop
   function handleIsRunningChange(e) {
     setIsRunning(!isRunning);
   }
 
+  // handle when user click skipButton
   async function handleSkipButton(e) {
     setIsRunning(false);
+    // check if there is no steps remaining and timeNow is zero. redirect to review page
+    // else if timeNow is zero, timeNow change to next steps
     if (timer.recipeSteps[timer.stepIndex + 1] === undefined) {
       await props.postHistory({ recipeID: props.match.params.recipeID });
       await props.history.push(`/recipe/review/${props.match.params.recipeID}`);
@@ -75,7 +79,6 @@ function Counter(props) {
         stepIndex: timer.stepIndex + 1,
       });
     } else {
-
       setTimer({
         ...timer,
         timeNow: timer.recipeSteps[timer.stepIndex + 1].time * 10,

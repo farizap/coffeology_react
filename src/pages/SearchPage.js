@@ -17,8 +17,8 @@ import SearchIcon from '@material-ui/icons/Search';
 
 import Pagination from 'react-bootstrap/Pagination';
 import actionsRecipes from '../store/actionsRecipes';
-import RecipeCard from '../components/recipeCard';
-import Filter from '../components/filter';
+import RecipeCard from '../components/RecipeCard';
+import Filter from '../components/Filter';
 import loading from '../assets/images/loading.gif';
 
 const _ = require('lodash');
@@ -62,40 +62,44 @@ const Search = (props) => {
     pagination: 1,
   });
 
+  // function that toogle visibility status of drawer that contain filter
   const toggleDrawer = (side, open) => (event) => {
     if (
-      event
-            && event.type === 'keydown'
-            && (event.key === 'Tab' || event.key === 'Shift')
+      event &&
+      event.type === 'keydown' &&
+      (event.key === 'Tab' || event.key === 'Shift')
     ) {
       return;
     }
 
-    setState({ ...state, bottom: open });
+    setState({ bottom: open });
   };
 
+  // return drawer that contain filter
   const fullList = (side) => (
-    <div
-      className={classes.fullList}
-      role="presentation"
-    >
+    <div className={classes.fullList} role="presentation">
       <Filter onClick={toggleDrawer('bottom', false)} />
     </div>
   );
 
+  // run when search form submitted
   const onSubmitSearch = (event) => {
     event.preventDefault();
+    // get recipes with params from search preferences
     props.searchRecipes(
       props.searchParams,
       props.searchKeyword,
       state.pagination,
     );
   };
+
+  // handle on change search form
   const onChangeSearch = (event) => {
     event.preventDefault();
     props.setSearchKeyword(event.target.value);
   };
 
+  // searchRecipes if searchParams or pagination change
   React.useEffect(() => {
     props.searchRecipes(
       props.searchParams,
@@ -103,11 +107,13 @@ const Search = (props) => {
       state.pagination,
     );
 
+    // willUnmount, reset props from store
     return () => {
       props.setRecipesSearch(null);
     };
   }, [props.searchParams, state.pagination]);
 
+  // convert input in seconds to string with format 'minute:seconds
   const convertSeconds = (secondsInput) => {
     let minutes = Math.floor(parseInt(secondsInput) / 60);
     let seconds = parseInt(secondsInput) - minutes * 60;
@@ -120,6 +126,7 @@ const Search = (props) => {
     return `${minutes}:${seconds}`;
   };
 
+  // handle change page button
   const handlePreviousPageButton = (event) => {
     event.preventDefault();
     setState({ pagination: state.pagination - 1 });
@@ -133,16 +140,10 @@ const Search = (props) => {
     <div>
       <form onSubmit={onSubmitSearch}>
         <Paper className={classesSearch.root}>
-          <IconButton
-            className={classesSearch.iconButton}
-            aria-label="menu"
-          >
+          <IconButton className={classesSearch.iconButton} aria-label="menu">
             <MenuIcon onClick={toggleDrawer('bottom', true)} />
           </IconButton>
-          <Divider
-            className={classesSearch.divider}
-            orientation="vertical"
-          />
+          <Divider className={classesSearch.divider} orientation="vertical" />
           <InputBase
             className={classesSearch.input}
             placeholder="Cari Nama Guides atau Nama Biji Kopi"
@@ -182,19 +183,16 @@ const Search = (props) => {
             <span />
           ) : (
             <div className="text-center">
-              <Pagination.First
-                onClick={handlePreviousPageButton}
-              />
+              <Pagination.First onClick={handlePreviousPageButton} />
             </div>
           )}
-          {props.recipesSearch.pageNow
-                    === props.recipesSearch.pageTotal ? (
-                      <span />
-            ) : (
-              <div className="text-center">
-                <Pagination.Last onClick={handleNextPageButton} />
-              </div>
-            )}
+          {props.recipesSearch.pageNow === props.recipesSearch.pageTotal ? (
+            <span />
+          ) : (
+            <div className="text-center">
+              <Pagination.Last onClick={handleNextPageButton} />
+            </div>
+          )}
         </Pagination>
       ) : (
         <div />

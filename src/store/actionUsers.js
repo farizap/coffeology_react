@@ -1,5 +1,6 @@
 import axios from 'axios';
 import Swal from 'sweetalert2';
+// eslint-disable-next-line
 import store from './store';
 
 const Toast = Swal.mixin({
@@ -17,10 +18,14 @@ const ToastTop = Swal.mixin({
 });
 
 const actionsUsers = (store) => ({
-  // user login
+  // setter data
+  // set user status
   setStatusRegister(state, value) {
     return { statusRegister: value };
   },
+
+  // axios
+  // login user
   login(state, data) {
     const config = {
       method: 'post',
@@ -39,6 +44,8 @@ const actionsUsers = (store) => ({
         });
       });
   },
+
+  // register user
   registerUser(state, data) {
     data.photo = '';
     const config = {
@@ -46,7 +53,6 @@ const actionsUsers = (store) => ({
       url: `${store.getState().baseURL}/users`,
       data,
     };
-
     axios(config)
       .then(async (response) => {
         const config = {
@@ -73,6 +79,8 @@ const actionsUsers = (store) => ({
         });
       });
   },
+
+  // logout user
   logout(state) {
     sessionStorage.removeItem('token');
   },

@@ -22,7 +22,6 @@ function radarRecipe(props) {
   ];
 
   const captions = {
-    // columns
     fragrance: 'fragrance',
     aroma: 'aroma',
     cleanliness: 'cleanliness',

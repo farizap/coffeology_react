@@ -1,19 +1,19 @@
-import React from "react";
-import { Modal, ButtonToolbar, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Modal, ButtonToolbar, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 // import store
-import { connect } from "unistore/react";
-import actionsRecipes from "../store/actionsRecipes";
+import { connect } from 'unistore/react';
+import actionsRecipes from '../store/actionsRecipes';
 
 // import component
-import StepCard from "../components/stepCard";
-import ReviewCard from "../components/ReviewCard";
+import StepCard from '../components/stepCard';
+import ReviewCard from '../components/ReviewCard';
 
 // import components
-import RadarRecipe from "../components/radarRecipe";
-import Disqus from "disqus-react";
+import RadarRecipe from '../components/RadarRecipe';
+import Disqus from 'disqus-react';
 
-import loading from "../assets/images/loading.gif";
+import loading from '../assets/images/loading.gif';
 
 class RecipeSelection extends React.Component {
   constructor(props, context) {
@@ -28,7 +28,7 @@ class RecipeSelection extends React.Component {
       water: 0,
       ratio: 0,
       recipeSteps: [],
-      userID: 0  // add to show edit and delete button
+      userID: 0, // add to show edit and delete button
     };
   }
 
@@ -61,19 +61,20 @@ class RecipeSelection extends React.Component {
       coffeeweight: this.props.recipe.coffeeWeight,
       water: this.props.recipe.water,
       ratio: this.props.recipe.water / this.props.recipe.coffeeWeight,
-      recipeSteps: this.props.recipeSteps
-    })
+      recipeSteps: this.props.recipeSteps,
+    });
     await this.props.getReview({ recipeID: this.props.match.params.recipeID });
 
     // this.props.setRecipeSteps(this.state.recipeSteps);
     this.props.setResetTimer();
 
-    if (sessionStorage.getItem("token") !== null) {
+    if (sessionStorage.getItem('token') !== null) {
       await this.props.getProfile();
-      await this.setState({ userID: this.props.userMe.id })
+      await this.setState({ userID: this.props.userMe.id });
     }
   }
 
+  // convert input in seconds to string with format 'minute:seconds
   convertSeconds(secondsInput) {
     let minutes = Math.floor(parseInt(secondsInput) / 60);
     let seconds = parseInt(secondsInput) - minutes * 60;
@@ -86,69 +87,80 @@ class RecipeSelection extends React.Component {
     return `${minutes}:${seconds}`;
   }
 
-  handleOnClickButton = async event => {
+  // handle on Click button, check if token is null, redirect to login page, if token exist, redirect to recipe demo
+  handleOnClickButton = async (event) => {
     event.preventDefault();
-    if (sessionStorage.getItem("token") === null) {
-      return this.setState({ showStartDemo: true })
+    if (sessionStorage.getItem('token') === null) {
+      return this.setState({ showStartDemo: true });
     } else {
       await this.props.setRecipeSteps(this.state.recipeSteps);
       sessionStorage.setItem(
-        "recipeSteps",
-        JSON.stringify(this.state.recipeSteps)
+        'recipeSteps',
+        JSON.stringify(this.state.recipeSteps),
       );
-      sessionStorage.setItem("recipe", JSON.stringify(this.props.recipe));
-      this.props.history.push("/recipe/demo/" + this.props.match.params.recipeID);
+      sessionStorage.setItem('recipe', JSON.stringify(this.props.recipe));
+      this.props.history.push(
+        '/recipe/demo/' + this.props.match.params.recipeID,
+      );
     }
-
   };
 
-  handleOnChangeCoffee = event => {
+  // handle when user input custom coffee weight, change amount water in every recipe steps
+  handleOnChangeCoffee = (event) => {
     event.preventDefault();
     if (event.target.value > 0) {
       const waterTotal = this.state.ratio * event.target.value;
 
       const recipeSteps = [];
 
-      this.state.recipeSteps.forEach(recipeStep => {
-        recipeStep["amount"] =
-          (recipeStep["amount"] / this.state.water) * waterTotal;
+      this.state.recipeSteps.forEach((recipeStep) => {
+        recipeStep['amount'] =
+          (recipeStep['amount'] / this.state.water) * waterTotal;
         recipeSteps.push(recipeStep);
       });
 
       this.setState({
         coffeeWeight: event.target.value,
         water: event.target.value * this.state.ratio,
-        recipeSteps: recipeSteps
+        recipeSteps: recipeSteps,
       });
     }
   };
 
+  // handle when user delete want to delete recipe, only permitted to the recipe owner
   handleDelete = async (e, id) => {
     e.preventDefault();
     await this.props.deleteRecipe(id);
 
     if (this.props.deleteRecipeStatus) {
       await this.setState({ showDelete: false });
-      this.props.history.push("/activity");
+      this.props.history.push('/activity');
     }
 
     await this.setState({ showDelete: false });
   };
 
+  // handle when user edit want to delete recipe, only permitted to the recipe owner
   handleEditRecipe = async (e, id) => {
     e.preventDefault();
-    await sessionStorage.setItem("Recipe", JSON.stringify(this.props.recipe))
-    await sessionStorage.setItem("RecipeDetail", JSON.stringify(this.props.recipeDetails))
-    await sessionStorage.setItem("note", this.props.recipeDetails.note)
-    await sessionStorage.setItem("stepTemporary", JSON.stringify(this.props.recipeSteps))
+    await sessionStorage.setItem('Recipe', JSON.stringify(this.props.recipe));
+    await sessionStorage.setItem(
+      'RecipeDetail',
+      JSON.stringify(this.props.recipeDetails),
+    );
+    await sessionStorage.setItem('note', this.props.recipeDetails.note);
+    await sessionStorage.setItem(
+      'stepTemporary',
+      JSON.stringify(this.props.recipeSteps),
+    );
     this.props.history.push(`/recipe/edit/${id}`);
-  }
+  };
 
   render() {
     if (this.props.recipe === null) {
       return <img src={loading} alt="loading..." />;
     } else if (
-      sessionStorage.getItem("token") !== null &&
+      sessionStorage.getItem('token') !== null &&
       this.props.userMe === null
     ) {
       return <img src={loading} alt="loading..." />;
@@ -158,17 +170,18 @@ class RecipeSelection extends React.Component {
           <img
             className="backbutton"
             src={this.props.backButton}
-            onClick={event => this.props.history.goBack()}
+            onClick={(event) => this.props.history.goBack()}
+            alt="backButton"
           />
           <h3>Data Resep Tidak Ada</h3>
         </div>
       );
     } else {
-      const disqusShortname = "coffeology"; //found in your Disqus.com dashboard
+      const disqusShortname = 'coffeology'; //found in your Disqus.com dashboard
       const disqusConfig = {
-        url: "http://localhost:3000/recipe/" + this.props.match.params.recipeID, //this.props.pageUrl
+        url: 'https://coffeology/recipe/' + this.props.match.params.recipeID, //this.props.pageUrl
         identifier: this.props.match.params.recipeID, //this.props.uniqueId
-        title: "Title of Your Article" + this.props.match.params.recipeID //this.props.title
+        title: 'Title of Your Article' + this.props.match.params.recipeID, //this.props.title
       };
 
       return (
@@ -176,19 +189,22 @@ class RecipeSelection extends React.Component {
           <img
             className="backbutton"
             src={this.props.backButton}
-            onClick={event => this.props.history.goBack()}
+            onClick={(event) => this.props.history.goBack()}
+            alt="backButton"
           />
           {this.state.userID === this.props.recipe.userID ? (
             <div align="right">
               <button
-                onClick={e => this.handleEditRecipe(e, this.props.match.params.recipeID)}
+                onClick={(e) =>
+                  this.handleEditRecipe(e, this.props.match.params.recipeID)
+                }
                 type="button"
                 className="btn btn-secondary btn-sm mr-2"
               >
                 Edit
               </button>
               <button
-                onClick={e => {
+                onClick={(e) => {
                   e.preventDefault();
                   this.setState({ showDelete: true });
                 }}
@@ -199,11 +215,10 @@ class RecipeSelection extends React.Component {
               </button>
             </div>
           ) : (
-              <div></div>
-            )}
+            <div></div>
+          )}
 
           <div className="container">
-
             {/* to show delete confirmation */}
             <Modal show={this.state.showDelete}>
               <Modal.Header>
@@ -213,7 +228,7 @@ class RecipeSelection extends React.Component {
               <Modal.Footer>
                 <Button
                   variant="secondary"
-                  onClick={e => {
+                  onClick={(e) => {
                     e.preventDefault();
                     this.setState({ showDelete: false });
                   }}
@@ -224,7 +239,7 @@ class RecipeSelection extends React.Component {
                   value="Submit"
                   type="submit"
                   variant="primary"
-                  onClick={e =>
+                  onClick={(e) =>
                     this.handleDelete(e, this.props.match.params.recipeID)
                   }
                 >
@@ -241,7 +256,7 @@ class RecipeSelection extends React.Component {
 
             <div className="row justify-content-center">
               <h6 className="text-secondary">
-                <Link to={"/profile/" + this.props.recipeCreator.id}>
+                <Link to={'/profile/' + this.props.recipeCreator.id}>
                   {this.props.recipeCreator.name}
                 </Link>
               </h6>
@@ -252,9 +267,12 @@ class RecipeSelection extends React.Component {
                 <img
                   className="w-75 bgcolor2"
                   src={this.props.methods[this.props.recipe.methodID - 1].icon}
+                  alt="methodIcon"
                 />
                 <br />
-                <h6>{this.props.methods[this.props.recipe.methodID - 1].name}</h6>
+                <h6>
+                  {this.props.methods[this.props.recipe.methodID - 1].name}
+                </h6>
               </div>
               <div className="col-8 ">
                 <div className="row">
@@ -280,13 +298,13 @@ class RecipeSelection extends React.Component {
             <div className="row justify-content-center py-2 mb-4 border-top border-bottom  bg-light ">
               <div className="col-4  text-center">
                 <div className="row justify-content-center">
-                  {" "}
+                  {' '}
                   <h6 className="border-bottom font-weight-bold">WAKTU</h6>
                 </div>
                 <div className="row justify-content-center align-items-center ">
                   <img
                     className="w-25 mr-1"
-                    src={require("../assets/images/RecipeIcon/timer.png")}
+                    src={require('../assets/images/RecipeIcon/timer.png')}
                     alt="alt tag"
                   />
                   <span>{this.convertSeconds(this.props.recipe.time)}</span>
@@ -294,13 +312,13 @@ class RecipeSelection extends React.Component {
               </div>
               <div className="col-4 text-center">
                 <div className="row justify-content-center">
-                  {" "}
+                  {' '}
                   <h6 className="border-bottom font-weight-bold">SUHU AIR</h6>
                 </div>
                 <div className="row justify-content-center align-items-center">
                   <img
                     className="w-25 mr-1"
-                    src={require("../assets/images/RecipeIcon/thermometer.png")}
+                    src={require('../assets/images/RecipeIcon/thermometer.png')}
                     alt="alt tag"
                   />
                   <span>{this.props.recipeDetails.waterTemp} (&deg;C)</span>
@@ -308,13 +326,13 @@ class RecipeSelection extends React.Component {
               </div>
               <div className="col-4 text-center">
                 <div className="row justify-content-center">
-                  {" "}
+                  {' '}
                   <h6 className="border-bottom font-weight-bold">GRIND</h6>
                 </div>
                 <div className="row justify-content-center align-items-center">
                   <img
                     className="w-25 mr-1"
-                    src={require("../assets/images/RecipeIcon/coffee-grinder.png")}
+                    src={require('../assets/images/RecipeIcon/coffee-grinder.png')}
                     alt="alt tag"
                   />
                   <span>
@@ -339,14 +357,14 @@ class RecipeSelection extends React.Component {
               <div className="col-2 align-content-center ">
                 <img
                   className="w-100"
-                  src={require("../assets/images/RecipeIcon/coffee-grain.png")}
+                  src={require('../assets/images/RecipeIcon/coffee-grain.png')}
                   alt="coffee-grain"
                 />
               </div>
               <div className="col-2">
                 <img
                   className="w-100"
-                  src={require("../assets/images/RecipeIcon/raindrop.png")}
+                  src={require('../assets/images/RecipeIcon/raindrop.png')}
                   alt="raindrop"
                 />
               </div>
@@ -487,7 +505,7 @@ class RecipeSelection extends React.Component {
               <div className="col-12 bg-light border-top border-bottom my-2">
                 <h5 className="mb-0 py-1">TAHAPAN</h5>
               </div>
-              {this.props.recipeSteps.map(recipeStep => (
+              {this.props.recipeSteps.map((recipeStep) => (
                 <div className="col-12">
                   <StepCard data={recipeStep} />
                 </div>
@@ -507,23 +525,21 @@ class RecipeSelection extends React.Component {
                 <Modal.Footer>
                   <Button
                     variant="secondary"
-                    onClick={e => {
+                    onClick={(e) => {
                       e.preventDefault();
                       this.setState({ showStartDemo: false });
                     }}
                   >
                     Batal
-                </Button>
+                  </Button>
                   <Button
                     value="Submit"
                     type="submit"
                     variant="primary"
-                    onClick={e =>
-                      this.props.history.push("/login")
-                    }
+                    onClick={(e) => this.props.history.push('/login')}
                   >
                     Login
-                </Button>
+                  </Button>
                 </Modal.Footer>
               </Modal>
             </div>
@@ -535,6 +551,6 @@ class RecipeSelection extends React.Component {
 }
 
 export default connect(
-  "recipe, stepTypes, recipeDetails, recipeSteps, waterLimit, backButton, recipeCreator, methods, reviews, userMe, grinds, deleteRecipeStatus",
-  actionsRecipes
+  'recipe, stepTypes, recipeDetails, recipeSteps, waterLimit, backButton, recipeCreator, methods, reviews, userMe, grinds, deleteRecipeStatus',
+  actionsRecipes,
 )(RecipeSelection);
