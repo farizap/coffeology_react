@@ -36,6 +36,14 @@ class InputStep extends React.Component {
   // to handle when data will submit
   handleSubmit = async (event) => {
     event.preventDefault();
+    // handle if notes empty
+    if (this.note.current.value.replace(/\s+/g, '') === '') {
+      return this.props.Toast.fire({
+        type: 'error',
+        title: 'Catatan tidak boleh kosong',
+      });
+    }
+
     // to handle if user input water amount
     if (parseInt(this.waterAmount.current.value) > 0) {
       await this.setState({

@@ -62,6 +62,13 @@
 .brewing .rowhomeimage .homecarousel {
   width: 100%;
 }
+.brewing .subtext {
+  font-size: 14px;
+}
+.profile .profileinfo {
+  background-color: #53686B;
+  box-shadow: 0 0.5rem 0.6rem rgba(0, 0, 0, 0.15);
+}
 .errorpage {
   height: 100%;
   margin: -15px;

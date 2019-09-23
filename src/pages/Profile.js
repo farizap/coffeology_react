@@ -131,18 +131,18 @@ class Profile extends React.Component {
     // Ade - End
     else {
       return (
-        <div className="container">
+        <div className="container profile">
           <h4 className="font-weight-bold">PROFILE</h4>
           <div className="row border login_box">
             <div className="col-12 py-3" align="center">
               <img
                 src={profileIcon}
-                style={{ borderRadius: '50%', backgroundColor: '#000000' }}
+                className="rounded-circle"
                 width="100px"
                 alt="profileIcon"
               />{' '}
               <br />
-              <h4 className="pt-1">
+              <h4 className="pt-2">
                 {this.props.userMe.name}
                 <img
                   onClick={(e) => {
@@ -155,32 +155,32 @@ class Profile extends React.Component {
                   className="ml-2"
                 ></img>
               </h4>
-              <span className="text-justify">{this.props.userMe.bio}</span>
+              <span className="text-justify text-secondary font-italic">{this.props.userMe.bio}</span>
             </div>
             <div
-              className="col-md-6 col-xs-6 border btn btn-orange"
+              className="col-6 p-0"
               align="center"
               onClick={(e) => this.props.history.push('/activity')}
             >
-              <h5>
+              <h5 className='py-3 border rounded text-white  profileinfo'>
                 {this.props.userMe.brewCount} <br /> <span>Brew</span>
               </h5>
             </div>
             <div
-              className="col-md-6 col-xs-6 border btn btn-orange"
+              className="col-6 p-0"
               align="center"
               onClick={(e) => this.props.history.push('/activity')}
             >
-              <h5>
+              <h5 className='py-3 border rounded text-white  profileinfo'>
                 {this.props.userMe.recipeCount} <br /> <span>Resep</span>
               </h5>
             </div>
 
-            <div className="col-12 col-md-12 col-xs-12 mt-2">
+            <div className="col-12 my-4">
               <div align="left">
                 <button
                   type="button"
-                  className="btn btn-primary"
+                  className="btn btn-primary btn-block"
                   onClick={(e) => {
                     e.preventDefault();
                     this.setState({ editPasswordView: true });
@@ -194,7 +194,7 @@ class Profile extends React.Component {
                 <button
                   onClick={(e) => this.handleLogot(e)}
                   type="button"
-                  className="btn btn-primary mb-3"
+                  className="btn btn-primary  btn-block"
                 >
                   Keluar
                 </button>

@@ -13,29 +13,29 @@ import HomeCarousel from '../components/HomeCarousel';
 class Brewing extends React.Component {
   render() {
     return (
-      <div>
-        <div className="container brewing">
-          <div className="row rowhomeimage">
-            <HomeCarousel />
-          </div>
-          <div className="row justify-content-center pt-3">
-            <div className="col-12">
-              <br />
-              <h4 className="font-weight-bold">Metode Brewing</h4>
-            </div>
-            {this.props.methods.map((method, index) => (
-              <div
-                className="col-4
-                             py-1 px-2"
-              >
-                <Link to={`/recipes/${method.id}`}>
-                  <MethodCard name={method.name} icon={method.icon} />
-                </Link>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+  <div>
+  <div className="container brewing">
+  <div className="row rowhomeimage">
+  <HomeCarousel />
+					</div>
+  <div className="row justify-content-center pt-3">
+  <div className="col-12">
+  <br />
+  <h4>METODE BREWING</h4>
+						</div>
+  {this.props.methods.map((method, index) => (
+  <div
+  className="col-4
+                             py-2 px-2"
+							>
+  <Link to={`/recipes/${method.id}`}>
+  <MethodCard name={method.name} icon={method.icon} />
+								</Link>
+							</div>
+						))}
+					</div>
+				</div>
+			</div>
     );
   }
 }

@@ -143,7 +143,7 @@ class CreateRecipe extends React.Component {
                 required
               />
             </div>
-            <div className="row form-group">
+            <div className="row form-group mt-3">
               <label htmlFor="methodID">Pilih Metode Brew</label>
 
               <select
@@ -181,8 +181,8 @@ class CreateRecipe extends React.Component {
                 <option value="3">Sulit</option>)
               </select>
             </div>
-            <div className=" row justify-content-center">
-              <div className=" col-5 m-1 ">
+            <div className=" row justify-content-center mt-3">
+              <div className=" col-5 m-1 py-1 ">
                 <div className=" row justify-content-center border">
                   <div className=" col-12">
                     <label htmlFor="coffeeWeight">
@@ -198,13 +198,13 @@ class CreateRecipe extends React.Component {
                       alt="altTag"
                     />
                   </div>
-                  <div className=" col-9 px-0">
+                  <div className=" col-9 px-0 mb-2">
                     <input
                       className="form-control"
                       type="number"
                       name="coffeeWeight"
                       defaultValue={this.state.coffeeWeight}
-                      placeholder="16"
+                      placeholder="jumlah biji"
                       min="1"
                       onChange={this.handleChangeRecipe}
                       required
@@ -213,7 +213,7 @@ class CreateRecipe extends React.Component {
                 </div>
               </div>
 
-              <div className=" col-5 m-1  ">
+              <div className=" col-5 m-1 py-1 ">
                 <div className=" row justify-content-center border">
                   <div className=" col-12">
                     <label htmlFor="water">
@@ -229,13 +229,13 @@ class CreateRecipe extends React.Component {
                       alt="altTag"
                     />
                   </div>
-                  <div className=" col-9 px-0">
+                  <div className=" col-9 px-0 mb-2">
                     <input
                       className="form-control"
                       type="number"
                       name="water"
                       defaultValue={this.state.water}
-                      placeholder="200"
+                      placeholder="jumlah air"
                       min="1"
                       onChange={this.handleChangeRecipe}
                       required
@@ -244,7 +244,7 @@ class CreateRecipe extends React.Component {
                 </div>
               </div>
 
-              <div className=" col-5 m-1  ">
+              <div className=" col-5 m-1 py-1 ">
                 <div className=" row justify-content-center border">
                   <div className=" col-12">
                     <label htmlFor="grindSize">
@@ -260,7 +260,7 @@ class CreateRecipe extends React.Component {
                       alt="altTag"
                     />
                   </div>
-                  <div className=" col-9 px-0">
+                  <div className=" col-9 px-0 mb-2">
                     <select
                       className="form-control"
                       id="grindSize"
@@ -280,7 +280,7 @@ class CreateRecipe extends React.Component {
                 </div>
               </div>
 
-              <div className=" col-5 m-1 ">
+              <div className=" col-5 m-1 py-1">
                 <div className=" row justify-content-center border">
                   <div className=" col-12">
                     <label htmlFor="waterTemp">
@@ -296,13 +296,13 @@ class CreateRecipe extends React.Component {
                       alt="altTag"
                     />
                   </div>
-                  <div className=" col-9 px-0">
+                  <div className=" col-9 px-0 mb-2">
                     <input
                       className="form-control"
                       type="number"
                       name="waterTemp"
                       defaultValue={this.state.waterTemp}
-                      placeholder="92"
+                      placeholder="suhu air"
                       min="1"
                       onChange={this.handleChangeRecipe}
                       required
@@ -312,11 +312,11 @@ class CreateRecipe extends React.Component {
               </div>
             </div>
 
-            <div className=" row bg-light py-3 justify-content-center bg-warning">
-              Profile Biji
+            <div className=" row bg-light mt-4 py-2 border-top border-bottom justify-content-center bg-warning">
+              PROFILE BIJI
             </div>
 
-            <div className=" row ">
+            <div className=" row mt-2">
               <label htmlFor="beanName">Biji :</label>
             </div>
 
@@ -332,7 +332,7 @@ class CreateRecipe extends React.Component {
               />
             </div>
 
-            <div className="row form-group">
+            <div className="row form-group mt-3">
               <label htmlFor="originID">Origin : </label>
 
               <select
@@ -368,11 +368,11 @@ class CreateRecipe extends React.Component {
               />
             </div>
 
-            <div className=" row ">
+            <div className=" row mt-3 ">
               <label htmlFor="beanRoasting">Roasting :</label>
             </div>
 
-            <div className=" row justify-content-center text-center">
+            <div className=" row justify-content-center text-center mb-3">
               <input
                 className="form-control"
                 type="text"
@@ -383,7 +383,7 @@ class CreateRecipe extends React.Component {
                 required
               />
             </div>
-            <RadarRecipe
+            <RadarRecipe 
               data={{
                 fragrance: this.state.fragrance,
                 aroma: this.state.aroma,

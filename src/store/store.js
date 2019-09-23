@@ -48,14 +48,12 @@ const initialState = {
   history: null,
   myBrew: null,
 
-
   // search
   searchParams: {},
   searchKeyword: '',
   originsParams: {},
   difficultiesParams: {},
   methodsParams: {},
-
 
   // user profile
   userMe: null,
@@ -68,11 +66,9 @@ const initialState = {
     timer: 2000,
   }),
 
-
   // another user profile
   user: null,
   userBrew: null,
-
 
   // method data
   methods: [
@@ -139,13 +135,12 @@ const initialState = {
 
   // origin data
   origins: [
-    { id: 1, name: 'jawa' },
-    { id: 2, name: 'sumatera' },
-    { id: 3, name: 'flores' },
-    { id: 4, name: 'toraja' },
+    { id: 1, name: 'Jawa' },
+    { id: 2, name: 'Sumatera' },
+    { id: 3, name: 'Flores' },
+    { id: 4, name: 'Toraja' },
     { id: 5, name: 'lainnya' },
   ],
-
 
   // import button image
   homeButton: require('../assets/images/home.png'),
