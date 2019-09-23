@@ -72,7 +72,7 @@ const Search = (props) => {
       return;
     }
 
-    setState({ bottom: open });
+    setState({ ...state, bottom: open });
   };
 
   // return drawer that contain filter
@@ -106,12 +106,16 @@ const Search = (props) => {
       props.searchKeyword,
       state.pagination,
     );
-
     // willUnmount, reset props from store
     return () => {
       props.setRecipesSearch(null);
     };
   }, [props.searchParams, state.pagination]);
+
+  // if searchParams change, pagination back to 1
+  React.useEffect(() => {
+    setState({ ...state, pagination: 1 });
+  }, [props.searchParams]);
 
   // convert input in seconds to string with format 'minute:seconds
   const convertSeconds = (secondsInput) => {
@@ -129,7 +133,7 @@ const Search = (props) => {
   // handle change page button
   const handlePreviousPageButton = (event) => {
     event.preventDefault();
-    setState({ pagination: state.pagination - 1 });
+    setState({ ...state, pagination: state.pagination - 1 });
   };
   const handleNextPageButton = (event) => {
     event.preventDefault();

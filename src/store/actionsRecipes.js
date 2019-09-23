@@ -133,6 +133,7 @@ const actionsRecipes = (store) => ({
 
   // get recipe at search page
   async searchRecipes(state, filterParams, searchParams, pagination) {
+    console.log(pagination);
     const paramsInput = filterParams;
     paramsInput.search = searchParams;
     paramsInput.p = pagination;
