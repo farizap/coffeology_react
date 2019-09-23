@@ -8,9 +8,9 @@ import stepTypes from './stepTypes';
 
 const initialState = {
   // url
-  baseURL: 'http://0.0.0.0:5000',
+  // baseURL: 'http://0.0.0.0:5000',
   statusRegister: null,
-  // baseURL: 'https://api.coffeology.shop',
+  baseURL: 'https://api.coffeology.shop',
 
   // user
   name: '',
