@@ -8,49 +8,45 @@ import loading from '../assets/images/loading.gif';
 
 const _ = require('lodash');
 
-class history extends React.Component {
+class History extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       pagination: 1,
     };
   }
 
-  // get history data from database
-  async componentDidMount() {
+  componentDidMount = async () => {
     this.getHistory();
-  }
+  };
 
-  // reset data history in store
-  componentWillUnmount() {
+  componentWillUnmount = () => {
     this.props.setHistory(null);
-  }
+  };
 
-  // get history data in certain page
-  getHistory() {
+  getHistory = () => {
     this.props.getHistory({ p: this.state.pagination });
-  }
+  };
 
   // handle to get data in previous page
-  handlePreviousPageButton(event) {
+  handlePreviousPageButton = (event) => {
     event.preventDefault();
     this.setState({ pagination: this.state.pagination - 1 }, () => {
       this.props.getHistory({
         p: this.state.pagination,
       });
     });
-  }
+  };
 
   // handle to get data in next page
-  handleNextPageButton(event) {
+  handleNextPageButton = (event) => {
     event.preventDefault();
     this.setState({ pagination: this.state.pagination + 1 }, () => {
       this.props.getHistory({
         p: this.state.pagination,
       });
     });
-  }
+  };
 
   render() {
     if (this.props.history === null) {
@@ -89,4 +85,4 @@ class history extends React.Component {
 export default connect(
   'methods, history',
   actionsActivity,
-)(history);
+)(History);

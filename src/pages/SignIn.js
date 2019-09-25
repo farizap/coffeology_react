@@ -25,196 +25,191 @@ import useStyles from '../store/style';
 
 // Sign in form component
 const SignInForm = (props) => {
-  const classes = useStyles();
+	const classes = useStyles();
 
-  // create state
-  const [values, setValues] = React.useState({
-    showPassword: false,
-  });
+	// create state
+	const [values, setValues] = React.useState({
+		showPassword: false
+	});
 
-  // defining props
-  const {
-    values: { email, password },
-    errors,
-    touched,
-    handleSubmit,
-    handleChange,
-    isValid,
-    setFieldTouched,
-  } = props;
+	// defining props
+	const {
+		values: { email, password },
+		errors,
+		touched,
+		handleSubmit,
+		handleChange,
+		isValid,
+		setFieldTouched
+	} = props;
 
-  // handle change in input form
-  const change = (name, e) => {
-    e.persist();
-    handleChange(e);
-    setFieldTouched(name, true, false);
-  };
+	// handle change in input form
+	const change = (name, e) => {
+		e.persist();
+		handleChange(e);
+		setFieldTouched(name, true, false);
+	};
 
-  // handle show/hide password form
-  const handleClickShowPassword = () => {
-    setValues({ ...values, showPassword: !values.showPassword });
-  };
+	// handle show/hide password form
+	const handleClickShowPassword = () => {
+		setValues({ ...values, showPassword: !values.showPassword });
+	};
 
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
+	const handleMouseDownPassword = (event) => {
+		event.preventDefault();
+	};
 
-  return (
-    <form className={classes.form} onSubmit={handleSubmit}>
-      <TextField
-        required
-        variant="outlined"
-        margin="normal"
-        fullWidth
-        id="email"
-        label="Email Address"
-        name="email"
-        value={email}
-        autoComplete="email"
-        onChange={change.bind(null, 'email')}
-        helperText={touched.email ? errors.email : ''}
-        error={touched.email && Boolean(errors.email)}
-        autoFocus
-      />{' '}
-      <TextField
-        required
-        variant="outlined"
-        margin="normal"
-        fullWidth
-        name="password"
-        value={password}
-        label="Password"
-        id="password"
-        type={values.showPassword ? 'text' : 'password'}
-        onChange={change.bind(null, 'password')}
-        error={touched.password && Boolean(errors.password)}
-        helperText={touched.password ? errors.password : ''}
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-              <IconButton
-                aria-label="toggle password visibility"
-                onClick={handleClickShowPassword}
-                onMouseDown={handleMouseDownPassword}
-              >
-                {values.showPassword ? <Visibility /> : <VisibilityOff />}
-              </IconButton>
-            </InputAdornment>
-          ),
-        }}
-      />
-      <Button
-        fullWidth
-        variant="contained"
-        color="primary"
-        className={classes.submit}
-        type="submit"
-        disable={!isValid}
-      >
-        Sign In
-      </Button>
-      <Grid container className="justify-content-center">
-        <Grid item>
-          ------------ ATAU ------------
-          <br />
-          {/* <Link to="/register">Don't have an account? Sign Up</Link> */}
-        </Grid>
-      </Grid>
-    </form>
-  );
+	return (
+		<form className={classes.form} onSubmit={handleSubmit}>
+			<TextField
+				required
+				variant="outlined"
+				margin="normal"
+				fullWidth
+				id="email"
+				label="Email Address"
+				name="email"
+				value={email}
+				autoComplete="email"
+				onChange={change.bind(null, 'email')}
+				helperText={touched.email ? errors.email : ''}
+				error={touched.email && Boolean(errors.email)}
+				autoFocus
+			/>{' '}
+			<TextField
+				required
+				variant="outlined"
+				margin="normal"
+				fullWidth
+				name="password"
+				value={password}
+				label="Password"
+				id="password"
+				type={values.showPassword ? 'text' : 'password'}
+				onChange={change.bind(null, 'password')}
+				error={touched.password && Boolean(errors.password)}
+				helperText={touched.password ? errors.password : ''}
+				InputProps={{
+					endAdornment: (
+						<InputAdornment position="end">
+							<IconButton
+								aria-label="toggle password visibility"
+								onClick={handleClickShowPassword}
+								onMouseDown={handleMouseDownPassword}
+							>
+								{values.showPassword ? <Visibility /> : <VisibilityOff />}
+							</IconButton>
+						</InputAdornment>
+					)
+				}}
+			/>
+			<Button
+				fullWidth
+				variant="contained"
+				color="primary"
+				className={classes.submit}
+				type="submit"
+				disable={!isValid}
+			>
+				Sign In
+			</Button>
+			<Grid container className="justify-content-center">
+				<Grid item>
+					------------ ATAU ------------
+					<br />
+					{/* <Link to="/register">Don't have an account? Sign Up</Link> */}
+				</Grid>
+			</Grid>
+		</form>
+	);
 };
 
 // schema validation created with yup
 const validationSchema = Yup.object({
-  email: Yup.string('Masukan Email Anda')
-    .email('Email tidak valid')
-    .required('Email tidak boleh kosong'),
-  password: Yup.string('')
-    .min(6, 'Gunakan huruf besar, huruf kecil dan angka. Minimal 6 karakter.')
-    .matches(
-      /^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])[\w\d]{6,30}$/,
-      'Gunakan huruf besar, huruf kecil dan angka. Minimal 6 karakter.',
-    )
-    .required('Password tidak boleh kosong'),
+	email: Yup.string('Masukan Email Anda')
+		.email('Email tidak valid')
+		.required('Email tidak boleh kosong'),
+	password: Yup.string('')
+		.min(6, 'Gunakan huruf besar, huruf kecil dan angka. Minimal 6 karakter.')
+		.matches(
+			/^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])[\w\d]{6,30}$/,
+			'Gunakan huruf besar, huruf kecil dan angka. Minimal 6 karakter.'
+		)
+		.required('Password tidak boleh kosong')
 });
 
 const SignIn = (props) => {
-  const classes = useStyles();
+	const classes = useStyles();
 
-  // store data from email and password
-  const dataSignIn = {
-    email: '',
-    password: '',
-  };
+	// store data from email and password
+	const dataSignIn = {
+		email: '',
+		password: ''
+	};
 
-  // create alert
-  const Toast = Swal.mixin({
-    toast: true,
-    position: 'center',
-    showConfirmButton: false,
-    timer: 2000,
-  });
+	// create alert
+	const Toast = Swal.mixin({
+		toast: true,
+		position: 'center',
+		showConfirmButton: false,
+		timer: 2000
+	});
 
-  // handle submit form, if data is valid, post to get token
-  const handleOnSubmit = async (dataSignIn) => {
-    await props.login(dataSignIn);
+	// handle submit form, if data is valid, post to get token
+	const handleOnSubmit = async (dataSignIn) => {
+		await props.login(dataSignIn);
 
-    // check login success, if true redirect to home
-    setTimeout(() => {
-      if (sessionStorage.getItem('token')) {
-        Toast.fire({
-          type: 'success',
-          title: 'Sukses Login!',
-        });
-        setTimeout(() => {
-          props.history.goBack();
-        }, 200);
-      }
-    }, 500);
-  };
+		// check login success, if true redirect to home
+		setTimeout(() => {
+			if (sessionStorage.getItem('token')) {
+				Toast.fire({
+					type: 'success',
+					title: 'Sukses Login!'
+				});
+				setTimeout(() => {
+					props.history.goBack();
+				}, 200);
+			}
+		}, 500);
+	};
 
-  return (
-    <div>
-      {sessionStorage.getItem('token') ? <Redirect to="/" /> : <div />}
-      <img
-        className="backbutton "
-        src={props.backButton}
-        onClick={(event) => props.history.goBack()}
-        alt="backButton"
-      />
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <HumanHandsup />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
-          <Formik
-            initialValues={dataSignIn}
-            onSubmit={handleOnSubmit}
-            validationSchema={validationSchema}
-            render={(props) => <SignInForm {...props} />}
-          />
+	return (
+		<div>
+			{sessionStorage.getItem('token') ? <Redirect to="/" /> : <div />}
+			<img
+				className="backbutton "
+				src={props.backButton}
+				onClick={(event) => props.history.goBack()}
+				alt="backButton"
+			/>
+			<Container component="main" maxWidth="xs">
+				<CssBaseline />
+				<div className={classes.paper}>
+					<Avatar className={classes.avatar}>
+						<HumanHandsup />
+					</Avatar>
+					<Typography component="h1" variant="h5">
+						Sign in
+					</Typography>
+					<Formik
+						initialValues={dataSignIn}
+						onSubmit={handleOnSubmit}
+						validationSchema={validationSchema}
+						render={(props) => <SignInForm {...props} />}
+					/>
 
-          <Link to="/register">
-            <Button
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-            >
-              Sign Up
-            </Button>
-          </Link>
-        </div>
-      </Container>
-    </div>
-  );
+					<Link to="/register">
+						<Button fullWidth variant="contained" color="primary" className={classes.submit}>
+							Sign Up
+						</Button>
+					</Link>
+				</div>
+			</Container>
+		</div>
+	);
 };
 
 export default connect(
-  'backButton',
-  actionsUsers,
+	'backButton',
+	actionsUsers
 )(SignIn);

@@ -1,6 +1,6 @@
 import React from 'react';
 
-function ReviewCard(props) {
+const ReviewCard = (props) => {
   return (
     <div className="container-fluid recipeCard border ">
       <div className="row h-100 pt-2 justify-content-center ">
@@ -35,6 +35,6 @@ function ReviewCard(props) {
       </div>
     </div>
   );
-}
+};
 
 export default ReviewCard;

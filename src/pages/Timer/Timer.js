@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Timer(props) {
+const Timer = (props) => {
   // Component that show time remaining in step running now
   return (
     <div className="container-fluid">
@@ -25,6 +25,6 @@ function Timer(props) {
       </div>
     </div>
   );
-}
+};
 
 export default Timer;

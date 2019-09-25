@@ -6,9 +6,9 @@ import actionsBeans from '../store/actionsBeans';
 import loading from '../assets/images/loading.gif';
 
 class BeanDetail extends React.Component {
-	componentWillMount = async () => {
-		await this.props.getBeanById(this.props.match.params.beanID);
-	};
+  componentWillMount = async () => {
+    await this.props.getBeanById(this.props.match.params.beanID);
+  };
 
 	render() {
 		if (!this.props.bean) {
@@ -24,8 +24,8 @@ class BeanDetail extends React.Component {
 					/>
 					<div className="container">
 						<div className="row">
-							<div className="col-12">
-								<h4 className="font-weight-bold mb-0">{this.props.bean.name}</h4>
+							<div className="col-12 pt-4">
+								<h4 className="font-weight-bold mb-0">{this.props.bean.name.toUpperCase()}</h4>
 							</div>
 							<div className="col-12">
 								<h6 className="text-secondary">
@@ -48,33 +48,33 @@ class BeanDetail extends React.Component {
 								{this.props.bean.disadvantage}
 							</div>
 
-							<div className="col-12 pt-4">
-								<h6 className="border-bottom">CITA RASA</h6>
+              <div className="col-12 pt-4">
+                <h6 className="border-bottom">CITA RASA</h6>
 
-								<RadarBean
-									data={{
-										fragrance: this.props.bean.fragrance,
-										flavor: this.props.bean.flavor,
-										aftertaste: this.props.bean.aftertaste,
-										acidity: this.props.bean.acidity,
-										body: this.props.bean.body,
-										balance: this.props.bean.balance,
-										uniformity: this.props.bean.uniformity,
-										cleanCups: this.props.bean.cleanCups,
-										sweetness: this.props.bean.sweetness,
-										overall: this.props.bean.overall
-									}}
-								/>
-							</div>
-						</div>
-					</div>
-				</div>
-			);
-		}
-	}
+                <RadarBean
+                  data={{
+                    fragrance: this.props.bean.fragrance,
+                    flavor: this.props.bean.flavor,
+                    aftertaste: this.props.bean.aftertaste,
+                    acidity: this.props.bean.acidity,
+                    body: this.props.bean.body,
+                    balance: this.props.bean.balance,
+                    uniformity: this.props.bean.uniformity,
+                    cleanCups: this.props.bean.cleanCups,
+                    sweetness: this.props.bean.sweetness,
+                    overall: this.props.bean.overall,
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+  }
 }
 
 export default connect(
-	'bean, origins, backButton',
-	actionsBeans
+  'bean, origins, backButton',
+  actionsBeans,
 )(BeanDetail);

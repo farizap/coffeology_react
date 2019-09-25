@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function TimerButton(props) {
+const TimerButton = (props) => {
   // component that contain play/pause button that can stop timer
 
   const classes = useStyles();
@@ -49,6 +49,6 @@ function TimerButton(props) {
       <PauseIcon />
     </Fab>
   );
-}
+};
 
 export default TimerButton;

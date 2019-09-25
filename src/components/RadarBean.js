@@ -2,7 +2,7 @@ import React from 'react';
 import RadarChart from 'react-svg-radar-chart';
 import 'react-svg-radar-chart/build/css/index.css';
 
-function radarBean(props) {
+const RadarBean = (props) => {
   const data = [
     {
       data: {
@@ -17,7 +17,7 @@ function radarBean(props) {
         sweetness: props.data.sweetness,
         overall: props.data.overall,
       },
-      meta: { color: 'blue' },
+      meta: { color: 'burlywood' },
     },
   ];
 
@@ -35,6 +35,6 @@ function radarBean(props) {
   };
 
   return <RadarChart captions={captions} data={data} size={300} />;
-}
+};
 
-export default radarBean;
+export default RadarBean;

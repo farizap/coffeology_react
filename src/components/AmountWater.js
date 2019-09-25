@@ -1,6 +1,6 @@
 import React from 'react';
 
-function AmountWater(props) {
+const AmountWater = (props) => {
   return (
     <div className="form-group mt-3" style={{ textAlign: 'left' }}>
       <label htmlFor="Jumlah Air">Jumlah Air </label>
@@ -14,6 +14,6 @@ function AmountWater(props) {
       />
     </div>
   );
-}
+};
 
 export default AmountWater;

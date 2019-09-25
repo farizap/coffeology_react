@@ -6,7 +6,7 @@ import { connect } from 'unistore/react';
 import actionsRecipes from '../store/actionsRecipes';
 
 // import component
-import StepCard from '../components/stepCard';
+import StepCard from '../components/StepCard';
 import ReviewCard from '../components/ReviewCard';
 
 // import components
@@ -15,7 +15,7 @@ import Disqus from 'disqus-react';
 
 import loading from '../assets/images/loading.gif';
 
-class RecipeSelection extends React.Component {
+class RecipeDetail extends React.Component {
   constructor(props, context) {
     super(props, context);
 
@@ -87,7 +87,10 @@ class RecipeSelection extends React.Component {
     return `${minutes}:${seconds}`;
   }
 
-  // handle on Click button, check if token is null, redirect to login page, if token exist, redirect to recipe demo
+  /* 
+  handle on Click button, check if token is null, redirect to login page
+  if token exist, redirect to recipe demo 
+  */
   handleOnClickButton = async (event) => {
     event.preventDefault();
     if (sessionStorage.getItem('token') === null) {
@@ -215,7 +218,7 @@ class RecipeSelection extends React.Component {
               </button>
             </div>
           ) : (
-            <div></div>
+            <div className="pt-4"></div>
           )}
 
           <div className="container">
@@ -425,7 +428,7 @@ class RecipeSelection extends React.Component {
               <div className="col-5">
                 <ButtonToolbar>
                   <Button
-                    className="btn-block"
+                    className="btn-block btn-secondary"
                     bsStyle="primary"
                     onClick={this.handleShowComment}
                   >
@@ -455,7 +458,7 @@ class RecipeSelection extends React.Component {
                       />
                     </Modal.Body>
                     <Modal.Footer>
-                      <Button onClick={this.handleHideComment}>Close</Button>
+                      <Button className="btn-secondary" onClick={this.handleHideComment}>Close</Button>
                     </Modal.Footer>
                   </Modal>
                 </ButtonToolbar>
@@ -464,7 +467,7 @@ class RecipeSelection extends React.Component {
               <div className="col-5 ">
                 <ButtonToolbar>
                   <Button
-                    className="btn-block"
+                    className="btn-block btn-secondary"
                     bsStyle="primary"
                     onClick={this.handleShowReview}
                   >
@@ -494,7 +497,7 @@ class RecipeSelection extends React.Component {
                       </div>
                     </Modal.Body>
                     <Modal.Footer>
-                      <Button onClick={this.handleHideReview}>Close</Button>
+                      <Button className="btn-secondary" onClick={this.handleHideReview}>Close</Button>
                     </Modal.Footer>
                   </Modal>
                 </ButtonToolbar>
@@ -513,7 +516,7 @@ class RecipeSelection extends React.Component {
               <div className="col-12 my-3">
                 <button
                   type="button"
-                  className="btn btn-danger btn-block"
+                  className="btn btn-dark btn-block"
                   onClick={this.handleOnClickButton}
                 >
                   Mulai
@@ -535,7 +538,7 @@ class RecipeSelection extends React.Component {
                   <Button
                     value="Submit"
                     type="submit"
-                    variant="primary"
+                    variant="secondary"
                     onClick={(e) => this.props.history.push('/login')}
                   >
                     Login
@@ -551,6 +554,6 @@ class RecipeSelection extends React.Component {
 }
 
 export default connect(
-  'recipe, stepTypes, recipeDetails, recipeSteps, waterLimit, backButton, recipeCreator, methods, reviews, userMe, grinds, deleteRecipeStatus',
+  'recipe, recipeDetails, recipeSteps, backButton, recipeCreator, methods, reviews, userMe, grinds, deleteRecipeStatus',
   actionsRecipes,
-)(RecipeSelection);
+)(RecipeDetail);

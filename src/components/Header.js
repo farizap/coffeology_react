@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../assets/images/logo1.jpg';
 
-function header() {
+function Header() {
   return (
     <div className="container-fluid header px-0 fixed-top ">
       <div className="row h-100 mx-0">
@@ -16,4 +16,4 @@ function header() {
   );
 }
 
-export default header;
+export default Header;

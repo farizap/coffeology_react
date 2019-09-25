@@ -21,18 +21,16 @@ class MyBrew extends React.Component {
     };
   }
 
-  // to get Recipe Data in database for centain page
-  async componentDidMount() {
+  componentDidMount = () => {
     this.props.getMyBrew({ p: this.state.pagination });
-  }
+  };
 
-  // to reset data myBrew in store
-  componentWillUnmount() {
+  componentWillUnmount = () => {
     this.props.setMyBrew(null);
-  }
+  };
 
   // function to handle convert seconds to minute:second
-  convertSeconds(secondsInput) {
+  convertSeconds = (secondsInput) => {
     let minutes = Math.floor(parseInt(secondsInput) / 60);
     let seconds = parseInt(secondsInput) - minutes * 60;
     if (minutes < 10) {
@@ -42,23 +40,23 @@ class MyBrew extends React.Component {
       seconds = `0${seconds}`;
     }
     return `${minutes}:${seconds}`;
-  }
+  };
 
   // to get Recipe Data for previous page
-  handlePreviousPageButton(event) {
+  handlePreviousPageButton = (event) => {
     event.preventDefault();
     this.setState({ pagination: this.state.pagination - 1 }, () => {
       this.props.getMyBrew({ p: this.state.pagination });
     });
-  }
+  };
 
   // to get Recipe Data for previous page
-  handleNextPageButton(event) {
+  handleNextPageButton = (event) => {
     event.preventDefault();
     this.setState({ pagination: this.state.pagination + 1 }, () => {
       this.props.getMyBrew({ p: this.state.pagination });
     });
-  }
+  };
 
   render() {
     if (this.props.myBrew === null) {

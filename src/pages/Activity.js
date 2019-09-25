@@ -17,7 +17,7 @@ import AddIcon from '@material-ui/icons/Add';
 import History from '../components/History';
 import MyBrew from '../components/MyBrew';
 
-function TabPanel(props) {
+const TabPanel = (props) => {
   const { children, value, index, ...other } = props;
 
   return (
@@ -32,19 +32,19 @@ function TabPanel(props) {
       <Box p={3}>{children}</Box>
     </Typography>
   );
-}
+};
 
 TabPanel.propTypes = {
   index: PropTypes.any.isRequired,
   value: PropTypes.any.isRequired,
 };
 
-function a11yProps(index) {
+const a11yProps = (index) => {
   return {
     id: `full-width-tab-${index}`,
     'aria-controls': `full-width-tabpanel-${index}`,
   };
-}
+};
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -67,29 +67,29 @@ const useStylesFab = makeStyles((theme) => ({
   // },
 }));
 
-export default function Activity(props) {
+const Activity = (props) => {
   const classes = useStyles();
   const classesFab = useStylesFab();
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
 
   // handle change value from Tabs component
-  function handleChange(event, newValue) {
+  const handleChange = (event, newValue) => {
     setValue(newValue);
-  }
+  };
 
   // handle change value from SwipeableViews component
-  function handleChangeIndex(index) {
+  const handleChangeIndex = (index) => {
     setValue(index);
-  }
+  };
 
-  function handleCreateRecipe() {
+  const handleCreateRecipe = () => {
     sessionStorage.removeItem('stepTemporary');
     sessionStorage.removeItem('RecipeDetail');
     sessionStorage.removeItem('Recipe');
     sessionStorage.removeItem('note');
     props.history.push('/recipes/create');
-  }
+  };
 
   return (
     <div>
@@ -142,4 +142,6 @@ export default function Activity(props) {
       )}
     </div>
   );
-}
+};
+
+export default Activity;

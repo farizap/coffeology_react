@@ -11,7 +11,7 @@ import RecipeSteps from './RecipeSteps';
 import WaterBar from './WaterBar';
 import Water from './Water';
 
-function Counter(props) {
+const TimerPage = (props) => {
   const [timer, setTimer] = useState({
     stepIndex: 0,
     waterNow: 0,
@@ -34,8 +34,10 @@ function Counter(props) {
           timer.waterTotal + timer.stepNow.amount / timer.stepNow.time / 10,
       });
 
-      // check if there is no steps remaining and timeNow is zero. redirect to review page
-      // else if timeNow is zero, timeNow change to next steps
+      /*
+      check if there is no steps remaining and timeNow is zero. redirect to review page
+      else if timeNow is zero, timeNow change to next steps
+      */
       if (
         timer.recipeSteps[timer.stepIndex + 1] === undefined &&
         timer.timeNow === 0
@@ -54,18 +56,18 @@ function Counter(props) {
     isRunning ? 100 : null,
   );
 
-  useEffect(() => () => {}, []);
-
   // change isRuninng state, if isRunning state is false, timer is stop
-  function handleIsRunningChange(e) {
+  const handleIsRunningChange = (e) => {
     setIsRunning(!isRunning);
-  }
+  };
 
   // handle when user click skipButton
-  async function handleSkipButton(e) {
+  const handleSkipButton = async (e) => {
     setIsRunning(false);
-    // check if there is no steps remaining and timeNow is zero. redirect to review page
-    // else if timeNow is zero, timeNow change to next steps
+    /* 
+    check if there is no steps remaining and timeNow is zero. redirect to review page
+    else if timeNow is zero, timeNow change to next steps
+    */
     if (timer.recipeSteps[timer.stepIndex + 1] === undefined) {
       await props.postHistory({ recipeID: props.match.params.recipeID });
       await props.history.push(`/recipe/review/${props.match.params.recipeID}`);
@@ -97,7 +99,7 @@ function Counter(props) {
         stepIndex: timer.stepIndex + 1,
       });
     }
-  }
+  };
 
   return (
     <div className="container-fluid demopage">
@@ -115,12 +117,7 @@ function Counter(props) {
         </div>
         <div className="col-6 align-self-center  pr-5">
           <TimerButton isRunning={isRunning} onClick={handleIsRunningChange} />
-          <Fab
-            color="primary"
-            aria-label="add"
-            // className={classes.fab}
-            onClick={handleSkipButton}
-          >
+          <Fab color="primary" aria-label="add" onClick={handleSkipButton}>
             <SkipNextIcon />
           </Fab>
         </div>
@@ -136,9 +133,9 @@ function Counter(props) {
       </div>
     </div>
   );
-}
+};
 
-function useInterval(callback, delay) {
+const useInterval = (callback, delay) => {
   const savedCallback = useRef();
 
   // Remember the latest function.
@@ -156,9 +153,9 @@ function useInterval(callback, delay) {
       return () => clearInterval(id);
     }
   }, [delay]);
-}
+};
 
 export default connect(
   'recipeSteps,stepIndex',
   actionsDemo,
-)(Counter);
+)(TimerPage);

@@ -7,8 +7,6 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
 
-// import store
-
 import useStyles from '../store/style';
 
 // Register form. will be rendered with

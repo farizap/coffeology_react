@@ -14,7 +14,7 @@ const convertSeconds = (secondsInput) => {
   return `${minutes}:${seconds}`;
 };
 
-function stepCard(props) {
+const StepCard = (props) => {
   return (
     <div className="container-fluid stepCard ">
       <div className="row pt-2">
@@ -93,5 +93,6 @@ function stepCard(props) {
       </div>
     </div>
   );
-}
-export default connect('stepTypes, beanRatio')(stepCard);
+};
+
+export default connect('stepTypes, beanRatio')(StepCard);

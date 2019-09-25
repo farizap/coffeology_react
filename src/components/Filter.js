@@ -184,97 +184,87 @@ const Filter = (props) => {
   };
 
   return (
-    <div className="container filter">
-      <div className="filterHeader" />
-      <div className="row">
-        <div className="col-12 text-left pb-4">
-          <br />
-          <h6>Pilih Metode Brewing</h6>
-          <div className="scrolls mb-2">
-            {props.methods.map((value, index) => (
-              <Button
-                variant={methods[index] ? 'contained' : 'outlined'}
-                color="primary"
-                className={classes.button}
-                onClick={handleClickMethods}
-                key={`method${index}`}
-                id={index}
-              >
-                {value.name}
-              </Button>
-            ))}
-          </div>
-          <h6>Pilih Tingkat Kesulitan</h6>
+  <div className="container filter">
+  <div className="filterHeader" />
+  <div className="row">
+  <div className="col-12 text-left pb-4">
+  <br />
+  <h6>Pilih Metode Brewing</h6>
+  <div className="scrolls mb-2">
+  {props.methods.map((value, index) => (
+  <Button
+  variant={methods[index] ? 'contained' : 'outlined'}
+  color="primary"
+  className={classes.button}
+  onClick={handleClickMethods}
+  key={`method${index}`}
+  id={index}
+							>
+  {value.name}
+							</Button>
+						))}
+					</div>
+  <h6>Pilih Tingkat Kesulitan</h6>
 
-          <div className="scrolls mb-2">
-            {props.difficulties.map((value, index) => (
-              <Button
-                variant={difficulties[index] ? 'contained' : 'outlined'}
-                color="primary"
-                className={classes.button}
-                onClick={handleClickDifficulties}
-                key={`difficulty${index}`}
-                id={index}
-              >
-                {value}
-              </Button>
-            ))}
-          </div>
+  <div className="scrolls mb-2">
+  {props.difficulties.map((value, index) => (
+  <Button
+  variant={difficulties[index] ? 'contained' : 'outlined'}
+  color="primary"
+  className={classes.button}
+  onClick={handleClickDifficulties}
+  key={`difficulty${index}`}
+  id={index}
+							>
+  {value}
+							</Button>
+						))}
+					</div>
 
-          <h6>Pilih Origin</h6>
+  <h6>Pilih Origin</h6>
 
-          <div className="scrolls">
-            {props.origins.map((value, index) => (
-              <Button
-                variant={origins[index] ? 'contained' : 'outlined'}
-                color="primary"
-                className={classes.button}
-                onClick={handleClickOrigins}
-                key={`origin${index}`}
-                id={index}
-              >
-                {value.name}
-              </Button>
-            ))}
-          </div>
-          <br />
-          <FormControl variant="outlined" className={classesSort.formControl}>
-            <InputLabel ref={inputLabel} htmlFor="outlined-age-native-simple">
-              Sort
-            </InputLabel>
-            <Select
-              native
-              labelWidth={labelWidth}
-              inputProps={{
-                name: 'age',
-                id: 'outlined-age-native-simple',
-              }}
-              onChange={handleChangeSort}
-            >
-              <option value="" />
-              <option value="rating">Rating Paling Tinggi</option>
-              <option value="brewCount">Terpopuler</option>
-              <option value="difficulty">
-                Tingkat Kesulitan (Mudah-Sulit)
-              </option>
-              <option value="difficultyDesc">
-                Tingkat Kesulitan (Sulit-Mudah)
-              </option>
-            </Select>
-          </FormControl>
-          <br />
+  <div className="scrolls">
+  {props.origins.map((value, index) => (
+  <Button
+  variant={origins[index] ? 'contained' : 'outlined'}
+  color="primary"
+  className={classes.button}
+  onClick={handleClickOrigins}
+  key={`origin${index}`}
+  id={index}
+							>
+  {value.name}
+							</Button>
+						))}
+					</div>
+  <br />
+  <FormControl variant="outlined" className={classesSort.formControl}>
+  <InputLabel ref={inputLabel} htmlFor="outlined-age-native-simple">
+							Sort
+						</InputLabel>
+  <Select
+  native
+  labelWidth={labelWidth}
+  inputProps={{
+							  name: 'age',
+							  id: 'outlined-age-native-simple',
+							}}
+  onChange={handleChangeSort}
+						>
+  <option value="" />
+  <option value="rating">Rating Paling Tinggi</option>
+  <option value="brewCount">Terpopuler</option>
+  <option value="difficulty">Tingkat Kesulitan (Mudah-Sulit)</option>
+						</Select>
+					</FormControl>
+  <br />
 
-          <Button
-            variant="contained"
-            color="primary"
-            className={classes.button}
-            onClick={handleClickFilter}
-          >
-            Filter
-          </Button>
-        </div>
-      </div>
-    </div>
+  <Button variant="contained" color="primary" className={classes.button} onClick={handleClickFilter}>
+						Filter
+					</Button>
+				</div>
+			</div>
+		</div>
   );
 };
 

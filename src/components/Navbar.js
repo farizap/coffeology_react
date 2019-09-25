@@ -35,7 +35,7 @@ const useStyles = makeStyles({
   },
 });
 
-const SimpleBottomNavigation = (props) => {
+const Navbar = (props) => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -97,4 +97,4 @@ const SimpleBottomNavigation = (props) => {
 export default connect(
   'login',
   actionsUsers,
-)(SimpleBottomNavigation);
+)(Navbar);

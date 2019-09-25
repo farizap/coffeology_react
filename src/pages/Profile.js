@@ -73,12 +73,10 @@ class Profile extends React.Component {
   // handle edit password user
   handleSubmitPassword = async (e) => {
     e.preventDefault();
-
     let data = {
       passwordOld: this.state.passwordOld,
       passwordNew: this.state.passwordNew,
     };
-
     await this.props.editPassword(data);
 
     // if data is not valid
@@ -155,14 +153,16 @@ class Profile extends React.Component {
                   className="ml-2"
                 ></img>
               </h4>
-              <span className="text-justify text-secondary font-italic">{this.props.userMe.bio}</span>
+              <span className="text-justify text-secondary font-italic">
+                {this.props.userMe.bio}
+              </span>
             </div>
             <div
               className="col-6 p-0"
               align="center"
               onClick={(e) => this.props.history.push('/activity')}
             >
-              <h5 className='py-3 border rounded text-white  profileinfo'>
+              <h5 className="py-3 border rounded text-white  profileinfo">
                 {this.props.userMe.brewCount} <br /> <span>Brew</span>
               </h5>
             </div>
@@ -171,7 +171,7 @@ class Profile extends React.Component {
               align="center"
               onClick={(e) => this.props.history.push('/activity')}
             >
-              <h5 className='py-3 border rounded text-white  profileinfo'>
+              <h5 className="py-3 border rounded text-white  profileinfo">
                 {this.props.userMe.recipeCount} <br /> <span>Resep</span>
               </h5>
             </div>
@@ -180,7 +180,7 @@ class Profile extends React.Component {
               <div align="left">
                 <button
                   type="button"
-                  className="btn btn-primary btn-block"
+                  className="btn btn-dark btn-block"
                   onClick={(e) => {
                     e.preventDefault();
                     this.setState({ editPasswordView: true });
@@ -194,7 +194,7 @@ class Profile extends React.Component {
                 <button
                   onClick={(e) => this.handleLogot(e)}
                   type="button"
-                  className="btn btn-primary  btn-block"
+                  className="btn btn-dark  btn-block"
                 >
                   Keluar
                 </button>

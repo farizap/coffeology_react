@@ -53,7 +53,7 @@ const useStylesSearch = makeStyles((theme) => ({
   },
 }));
 
-const Search = (props) => {
+const SearchPage = (props) => {
   const classes = useStyles();
   const classesSearch = useStylesSearch();
 
@@ -217,4 +217,4 @@ const Search = (props) => {
 export default connect(
   'searchParams,searchKeyword,recipesSearch,methods',
   actionsRecipes,
-)(Search);
+)(SearchPage);

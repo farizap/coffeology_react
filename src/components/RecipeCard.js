@@ -1,7 +1,6 @@
 import React from 'react';
 
-function recipeCard(props) {
-  
+const RecipeCard = (props) => {
   // to show difficulty in recipe card
   const showDifficulty = (level) => {
     if (level === 1) {
@@ -173,6 +172,6 @@ function recipeCard(props) {
       </div>
     </div>
   );
-}
+};
 
-export default recipeCard;
+export default RecipeCard;

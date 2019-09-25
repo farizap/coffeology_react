@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CustomizedInputBase(props) {
+const SearchBar = (props) => {
   const classes = useStyles();
 
   return (
@@ -54,4 +54,6 @@ export default function CustomizedInputBase(props) {
       </IconButton>
     </Paper>
   );
-}
+};
+
+export default SearchBar;
